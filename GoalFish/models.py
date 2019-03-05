@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class Score(models.Model):
-    value = models.IntegerField(max_length=3)
+    value = models.IntegerField()
 
 class Goal(models.Model):
     description = models.CharField(max_length=250)
@@ -38,4 +38,4 @@ class Evaluation(models.Model):
         on_delete=models.CASCADE,
     )
     date = models.DateField()
-    schoolWeek = models.IntegerField(max_length=2)
+    schoolWeek = models.IntegerField()
