@@ -7,7 +7,7 @@ from django.template import RequestContext
 from goalfish.forms import UserForm
 
 def index(request):
-    template_name = 'index.html'
+    template_name = 'goalfish/index.html'
     return render(request, template_name, {})
 
 
