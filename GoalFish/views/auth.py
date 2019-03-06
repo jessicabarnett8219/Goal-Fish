@@ -43,7 +43,7 @@ def register(request):
 
     elif request.method == 'GET':
         user_form = UserForm()
-        template_name = 'register.html'
+        template_name = 'goalfish/register.html'
         return render(request, template_name, {'user_form': user_form})
 
 
@@ -76,7 +76,7 @@ def login_user(request):
             return HttpResponse("Invalid login details supplied.")
 
 
-    return render(request, 'login.html', {}, context)
+    return render(request, 'goalfish/login.html', {}, context)
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
