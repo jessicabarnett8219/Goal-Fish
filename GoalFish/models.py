@@ -10,6 +10,9 @@ class Goal(models.Model):
 class GradeLevel(models.Model):
     grade = models.CharField(max_length=1)
 
+    def __str__(self):
+        return self.grade
+
 class Student(models.Model):
     user = models.ForeignKey(
         User,
@@ -23,6 +26,9 @@ class Student(models.Model):
     lastName = models.CharField(max_length=50)
     age = models.IntegerField()
     classroomTeacher = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.firstName, self.lastName
 
 class Evaluation(models.Model):
     student = models.ForeignKey(
