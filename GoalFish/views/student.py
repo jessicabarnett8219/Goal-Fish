@@ -30,7 +30,9 @@ def add_student(request):
 
     current_user_id = request.user.id
     user = get_object_or_404(User, pk=current_user_id)
-    grade_level = get_object_or_404(GradeLevel, pk=1)
+
+    grade_level_id = request.POST["grade_level"]
+    grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
 
     new_student = Student(
         user = user,
@@ -45,8 +47,9 @@ def add_student(request):
 
 @login_required
 def display_student_form(request):
+    grade_levels = GradeLevel.objects.all()
 
     template_name = 'goalfish/add_student_form.html'
 
-    return render(request, template_name)
+    return render(request, template_name, {'grade_levels': grade_levels})
 
