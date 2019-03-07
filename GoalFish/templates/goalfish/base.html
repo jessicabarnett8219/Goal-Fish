@@ -16,10 +16,10 @@
 
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Add a New Student</a>
+                <a class="nav-link" href="{% url 'goalfish:add_student_form' %}">Add a New Student</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/students">View All Students</a>
+                <a class="nav-link" href="{% url 'goalfish:all_students' %}">View All Students</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goalfish:logout' %}">Logout</a>

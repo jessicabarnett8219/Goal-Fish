@@ -6,6 +6,8 @@ class Score(models.Model):
 
 class Goal(models.Model):
     description = models.CharField(max_length=250)
+    def __str__(self):
+        return self.description
 
 class GradeLevel(models.Model):
     grade = models.CharField(max_length=1)
@@ -28,7 +30,7 @@ class Student(models.Model):
     classroomTeacher = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.firstName, self.lastName
+        return self.firstName, self.lastName, self.classroomTeacher
 
 class Evaluation(models.Model):
     student = models.ForeignKey(

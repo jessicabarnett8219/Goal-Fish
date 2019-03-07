@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^logout$', views.user_logout, name='logout'),
     url(r'^register$', views.register, name='register'),
     path('students/', views.list_students, name='all_students'),
-
+    path('add-student/', views.display_student_form, name='add_student_form'),
+    path('student-added/', views.add_student, name='add_student'),
 ]
