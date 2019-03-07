@@ -1,0 +1,24 @@
+{% extends 'goalfish/base.html' %}
+{% block content %}
+<h1>Add a Student</h1>
+
+<form action="{% url 'goalfish:add_student' %}" method="POST">
+    {% csrf_token %}
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name" id="first_name">
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name" id="last_name">
+    <label for="age">Age</label>
+    <input type="number" name="age" id="age">
+    <label for="grade_level">Grade Level</label>
+    <select name="grade_level" id="grade_level">
+    {% for level in grade_levels %}
+        <option value={{level.id}}>{{ level.grade }}</option>
+    {% endfor %}
+   </select>
+    <label for="classroom_teacher">Classroom Teacher</label>
+    <input type="text" name="classroom_teacher" id="classroom_teacher">
+    <input type="submit" value="Add Student">
+</form>
+
+{% endblock content %}
