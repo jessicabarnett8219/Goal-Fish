@@ -1,0 +1,14 @@
+{% extends 'goalfish/base.html' %}
+{% block content %}
+<h1>Student Detail</h1>
+<ul>
+    <li>Name: {{student.firstName}} {{student.lastName}}</li>
+    <li>Age: {{student.age}}</li>
+    <li>Grade Level: {{student.gradeLevel.grade}}</li>
+    <li>Classroom Teacher: {{student.classroomTeacher}}</li>
+</ul>
+
+<p><a href="#">New Evaluation</a></p>
+<p><a href="#">Edit Info</a></p>
+<p><a href="#">View Progress</a></p>
+{% endblock %}

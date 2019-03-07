@@ -53,3 +53,10 @@ def display_student_form(request):
 
     return render(request, template_name, {'grade_levels': grade_levels})
 
+@login_required
+def student_detail(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+    template_name = 'goalfish/student_detail.html'
+
+    return render(request, template_name, {"student": student})
+

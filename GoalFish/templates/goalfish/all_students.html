@@ -6,6 +6,7 @@
 {% for student in students %}
 <li>
     <p>{{ student.firstName }} {{ student.lastName }} Grade: {{ student.gradeLevel.grade}}</p>
+    <a href="{% url 'goalfish:student_detail' student.id %}">View Details</a>
 </li>
 {% endfor %}
 </ul>
