@@ -19,10 +19,3 @@ def add_evaluation(request):
     first_name = request.POST["first_name"]
 
 
-# @login_required
-# def edit_evaluation(request, student_id):
-
-# @login_required
-# def delete_evaluation(request, student_id):
-
-
