@@ -14,11 +14,10 @@ def display_eval_form(request, student_id):
 
     return render(request, template_name, {'student': student, 'goals': goals})
 
-# @login_required
-# def new_evaluation(request, student_id):
-#     student = get_object_or_404(Student, pk=student_id)
+@login_required
+def add_evaluation(request):
+    first_name = request.POST["first_name"]
 
-#     return render(request, template_name, {'student': student, 'goals': goals})
 
 # @login_required
 # def edit_evaluation(request, student_id):
