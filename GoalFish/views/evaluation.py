@@ -7,7 +7,8 @@ from django.urls import reverse
 
 @login_required(login_url='/login')
 def display_eval_form(request, student_id):
-    student = get_object_or_404(Student, pk=student_id)
+    current_user = request.user
+    student = get_object_or_404(Student, pk=student_id, user=current_user)
     goals = Goal.objects.all()
 
     template_name = "goalfish/eval_form.html"
@@ -57,6 +58,7 @@ def add_evaluation(request, student_id):
 
 @login_required(login_url='/login')
 def eval_detail(request, eval_id):
+    current_user = request.user
     evaluation = get_object_or_404(Evaluation, pk=eval_id)
     template_name = "goalfish/eval_detail.html"
 

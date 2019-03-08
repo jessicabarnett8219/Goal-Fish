@@ -16,8 +16,9 @@ def list_students(request):
     Returns:
         [render] -- [renders the all_students template]
     '''
+    current_user = request.user
 
-    all_students = Student.objects.all()
+    all_students = Student.objects.filter(user=current_user)
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': all_students})
 
@@ -28,14 +29,13 @@ def add_student(request):
     age = request.POST["age"]
     classroom_teacher = request.POST["classroom_teacher"]
 
-    current_user_id = request.user.id
-    user = get_object_or_404(User, pk=current_user_id)
+    current_user = request.user
 
     grade_level_id = request.POST["grade_level"]
     grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
 
     new_student = Student(
-        user = user,
+        user = current_user,
         gradeLevel = grade_level,
         firstName = first_name,
         lastName = last_name,
@@ -55,7 +55,8 @@ def display_student_form(request):
 
 @login_required(login_url='/login')
 def student_detail(request, student_id):
-    student = get_object_or_404(Student, pk=student_id)
+    current_user = request.user
+    student = get_object_or_404(Student, pk=student_id, user=current_user)
     template_name = 'goalfish/student_detail.html'
 
     return render(request, template_name, {"student": student})
