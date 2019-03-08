@@ -3,24 +3,27 @@
 <h1>{{student.firstName}} {{student.lastName}}</h1>
 <form action="{% url 'goalfish:eval_added' student.id %}" method="POST">
     {% csrf_token %}
-
+    <label for="eval_date">Date</label>
+    <input type="date" id="eval_date" name="eval_date" required>
+    <label>School Week</label>
+    <input type="number" min="1" max="36" name="school_week" required>
     {% for goal in goals %}
     <div>
     <label for="score">{{goal.description}}</label>
         <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="0">
+            <input type="radio" name="score{{goal.id}}" value="0" required>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="25">
+            <input type="radio" name="score{{goal.id}}" value="25" required>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="50">
+            <input type="radio" name="score{{goal.id}}" value="50" required>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="75">
+            <input type="radio" name="score{{goal.id}}" value="75" required>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="100">
+            <input type="radio" name="score{{goal.id}}" value="100" required>
         </div>
     </div>
     {% endfor %}

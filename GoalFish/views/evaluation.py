@@ -25,6 +25,8 @@ def add_evaluation(request, student_id):
     goal5 = get_object_or_404(Goal, pk=5)
     goal6 = get_object_or_404(Goal, pk=6)
 
+    eval_date = request.POST["eval_date"]
+    school_week = request.POST["school_week"]
     score1 = request.POST["score1"]
     score2 = request.POST["score2"]
     score3 = request.POST["score3"]
@@ -33,8 +35,8 @@ def add_evaluation(request, student_id):
     score6 = request.POST["score6"]
 
     new_evaluation = Evaluation(
-        date = "2019-02-11",
-        schoolWeek = 2,
+        date = eval_date,
+        schoolWeek = school_week,
         score1 = int(score1),
         score2 = int(score2),
         score3 = int(score3),
