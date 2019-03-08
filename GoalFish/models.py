@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class Score(models.Model):
-    value = models.IntegerField()
 
 class Goal(models.Model):
     description = models.CharField(max_length=250)
@@ -37,13 +35,41 @@ class Evaluation(models.Model):
         Student,
         on_delete=models.CASCADE,
     )
-    score = models.ForeignKey(
-        Score,
-        on_delete=models.CASCADE,
-    )
-    goal = models.ForeignKey(
-        Goal,
-        on_delete=models.CASCADE,
-    )
     date = models.DateField()
     schoolWeek = models.IntegerField()
+    goal1 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal1"
+    )
+    score1 = models.IntegerField()
+    goal2 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal2"
+    )
+    score2 = models.IntegerField()
+    goal3 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal3"
+    )
+    score3 = models.IntegerField()
+    goal4 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal4"
+    )
+    score4 = models.IntegerField()
+    goal5 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal5"
+    )
+    score5 = models.IntegerField()
+    goal6 = models.ForeignKey(
+        Goal,
+        on_delete=models.CASCADE,
+        related_name="goal6"
+    )
+    score6 = models.IntegerField()

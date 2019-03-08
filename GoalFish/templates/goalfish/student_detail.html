@@ -8,7 +8,7 @@
     <li>Classroom Teacher: {{student.classroomTeacher}}</li>
 </ul>
 
-<p><a href="#">New Evaluation</a></p>
+<p><a href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a></p>
 <p><a href="#">Edit Info</a></p>
 <p><a href="#">View Progress</a></p>
 {% endblock %}
