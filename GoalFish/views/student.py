@@ -6,7 +6,7 @@ from ..models import Student, User, GradeLevel
 from django.urls import reverse
 
 
-@login_required
+@login_required(login_url='/login')
 def list_students(request):
     '''[Queries the database for all objects in the student table and uses them in rendering the all_students template]
 
@@ -21,7 +21,7 @@ def list_students(request):
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': all_students})
 
-@login_required
+@login_required(login_url='/login')
 def add_student(request):
     first_name = request.POST["first_name"]
     last_name = request.POST["last_name"]
@@ -45,7 +45,7 @@ def add_student(request):
     new_student.save()
     return HttpResponseRedirect(reverse('goalfish:all_students'))
 
-@login_required
+@login_required(login_url='/login')
 def display_student_form(request):
     grade_levels = GradeLevel.objects.all()
 
@@ -53,7 +53,7 @@ def display_student_form(request):
 
     return render(request, template_name, {'grade_levels': grade_levels})
 
-@login_required
+@login_required(login_url='/login')
 def student_detail(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     template_name = 'goalfish/student_detail.html'
