@@ -12,4 +12,7 @@
     <li>{{evaluation.goal5.description}} {{evaluation.score5}}%</li>
     <li>{{evaluation.goal6.description}} {{evaluation.score6}}%</li>
 </ul>
+
+<a href="{% url 'goalfish:student_detail' evaluation.student.id %}">Back to Student Detail</a>
+<a>Back to Student Progress</a>
 {% endblock %}
