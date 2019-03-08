@@ -53,5 +53,15 @@ def add_evaluation(request, student_id):
     )
     new_evaluation.save()
 
-    return HttpResponseRedirect(reverse('goalfish:all_students'))
+    return HttpResponseRedirect(reverse('goalfish:eval_detail', args=(new_evaluation.id, )))
+
+@login_required(login_url='/login')
+def eval_detail(request, eval_id):
+    evaluation = get_object_or_404(Evaluation, pk=eval_id)
+    template_name = "goalfish/eval_detail.html"
+
+    return render(request, template_name, {'evaluation': evaluation})
+
+
+
 

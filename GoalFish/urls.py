@@ -15,4 +15,5 @@ urlpatterns = [
     path('students/<int:student_id>/', views.student_detail, name='student_detail'),
     path('new-evaluation/<int:student_id>/', views.display_eval_form, name='new_eval'),
     path('eval-added/<int:student_id>/', views.add_evaluation, name='eval_added'),
+    path('eval-detail/<int:eval_id>/', views.eval_detail, name='eval_detail'),
 ]
