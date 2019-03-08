@@ -1,0 +1,18 @@
+{% extends 'goalfish/base.html' %}
+{% block content %}
+
+<h1>Evaluation Detail</h1>
+<h2>{{evaluation.student.firstName}} {{evaluation.student.lastName}}</h2>
+<h3>{{evaluation.date}} School Week: {{evaluation.schoolWeek}}</h3>
+<ul>
+    <li>{{evaluation.goal1.description}} {{evaluation.score1}}%</li>
+    <li>{{evaluation.goal2.description}} {{evaluation.score2}}%</li>
+    <li>{{evaluation.goal3.description}} {{evaluation.score3}}%</li>
+    <li>{{evaluation.goal4.description}} {{evaluation.score4}}%</li>
+    <li>{{evaluation.goal5.description}} {{evaluation.score5}}%</li>
+    <li>{{evaluation.goal6.description}} {{evaluation.score6}}%</li>
+</ul>
+
+<a href="{% url 'goalfish:student_detail' evaluation.student.id %}">Back to Student Detail</a>
+<a>Back to Student Progress</a>
+{% endblock %}
