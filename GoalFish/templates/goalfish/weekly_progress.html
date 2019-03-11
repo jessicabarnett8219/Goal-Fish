@@ -5,13 +5,21 @@
 {% for evaluation in evaluations %}
 <li>
     {{evaluation.date}}<br>
-    {{evaluation.goal1}}: {{evaluation.score1}}<br>
-    {{evaluation.goal2}}: {{evaluation.score2}}<br>
-    {{evaluation.goal3}}: {{evaluation.score3}}<br>
-    {{evaluation.goal4}}: {{evaluation.score4}}<br>
-    {{evaluation.goal5}}: {{evaluation.score5}}<br>
-    {{evaluation.goal6}}: {{evaluation.score6}}<br>
+    {{evaluation.goal1}}: {{evaluation.score1}}%<br>
+    {{evaluation.goal2}}: {{evaluation.score2}}%<br>
+    {{evaluation.goal3}}: {{evaluation.score3}}%<br>
+    {{evaluation.goal4}}: {{evaluation.score4}}%<br>
+    {{evaluation.goal5}}: {{evaluation.score5}}%<br>
+    {{evaluation.goal6}}: {{evaluation.score6}}%<br>
 </li><br>
 {% endfor %}
+<li>
+    Weekly Average Goal 1: {{ score1_avg.score1__avg }}%<br>
+    Weekly Average Goal 2: {{ score2_avg.score2__avg }}%<br>
+    Weekly Average Goal 3: {{ score3_avg.score3__avg }}%<br>
+    Weekly Average Goal 4: {{ score4_avg.score4__avg }}%<br>
+    Weekly Average Goal 5: {{ score5_avg.score5__avg }}%<br>
+    Weekly Average Goal 6: {{ score6_avg.score6__avg }}%
+</li>
 </ul>
 {% endblock %}
