@@ -1,6 +1,11 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>Weekly Progress: School Week {{school_week}}</h1>
+<h1>Weekly Progress</h1>
+<form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
+    <label for="school_week">Select a School Week</label>
+    <input type="number" id="school_week" name="school_week" min="1" max="36" default="0" required>
+    <input type="submit">
+</form>
 <ul>
 {% for evaluation in evaluations %}
 <li>
