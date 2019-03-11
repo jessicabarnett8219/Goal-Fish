@@ -17,4 +17,5 @@ urlpatterns = [
     path('eval-added/<int:student_id>/', views.add_evaluation, name='eval_added'),
     path('eval-detail/<int:eval_id>/', views.eval_detail, name='eval_detail'),
     path('grade-filter', views.grade_filter, name='grade_filter'),
+    path('weekly-progress/<int:student_id>/', views.weekly_progress, name='weekly_progress'),
 ]

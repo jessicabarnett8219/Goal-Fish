@@ -64,6 +64,15 @@ def eval_detail(request, eval_id):
 
     return render(request, template_name, {'evaluation': evaluation})
 
+@login_required(login_url='/login')
+def weekly_progress(request, student_id):
+    template_name = "goalfish/weekly_progress.html"
+    current_student = get_object_or_404(Student, pk=student_id)
+        # students = Student.objects.filter(gradeLevel=grade, user=current_user)
+    school_week = 1
+    evaluations = Evaluation.objects.filter(student=current_student, schoolWeek=1)
+    return render(request, template_name, {'current_student': current_student, 'evaluations': evaluations, "school_week": school_week})
+
 
 
 
