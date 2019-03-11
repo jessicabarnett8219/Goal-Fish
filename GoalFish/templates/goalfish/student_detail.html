@@ -1,6 +1,7 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
 <h1>Student Detail</h1>
+</a>
 <ul>
     <li>Name: {{student.firstName}} {{student.lastName}}</li>
     <li>Age: {{student.age}}</li>
@@ -10,5 +11,5 @@
 
 <p><a href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a></p>
 <p><a href="#">Edit Info</a></p>
-<p><a href="#">View Progress</a></p>
+<p><a href="{% url 'goalfish:weekly_progress_form' student.id %}">View Progress</a></p>
 {% endblock %}
