@@ -1,6 +1,7 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>Weekly Progress</h1>
+<a href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
+<h1>{{current_student.firstName}} {{current_student.lastName}}'s Weekly Progress</h1>
 <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
     {% csrf_token %}
     <label for="school_week">Select a School Week</label>
