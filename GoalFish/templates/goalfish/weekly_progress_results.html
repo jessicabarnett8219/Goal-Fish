@@ -2,6 +2,7 @@
 {% block content %}
 <h1>Weekly Progress</h1>
 <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
+    {% csrf_token %}
     <label for="school_week">Select a School Week</label>
     <input type="number" id="school_week" name="school_week" min="1" max="36" default="0" required>
     <input type="submit">
@@ -18,13 +19,18 @@
     {{evaluation.goal6}}: {{evaluation.score6}}%<br>
 </li><br>
 {% endfor %}
-<li>
+    {% if score1_avg.score1__avg %}
+    <li>
     Weekly Average Goal 1: {{ score1_avg.score1__avg }}%<br>
     Weekly Average Goal 2: {{ score2_avg.score2__avg }}%<br>
     Weekly Average Goal 3: {{ score3_avg.score3__avg }}%<br>
     Weekly Average Goal 4: {{ score4_avg.score4__avg }}%<br>
     Weekly Average Goal 5: {{ score5_avg.score5__avg }}%<br>
     Weekly Average Goal 6: {{ score6_avg.score6__avg }}%
-</li>
+    </li>
+    {% else %}
+    <p>You haven't entered scores for this school week yet.</p>
+    {% endif %}
+
 </ul>
 {% endblock %}
