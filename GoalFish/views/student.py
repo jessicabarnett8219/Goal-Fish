@@ -76,9 +76,10 @@ def edit_student_form(request, student_id):
     student = get_object_or_404(Student, pk=student_id, user=current_user)
     grade_levels = GradeLevel.objects.all()
 
+    context = {"student": student, "grade_levels": grade_levels}
     template_name = "goalfish/edit_student_form.html"
 
-    return render(request, template_name, {"student": student, "grade_levels": grade_levels})
+    return render(request, template_name, context)
 
 @login_required(login_url='/login')
 def edit_student(request, student_id):
