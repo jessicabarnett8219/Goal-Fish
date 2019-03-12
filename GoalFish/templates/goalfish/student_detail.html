@@ -10,6 +10,6 @@
 </ul>
 
 <p><a href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a></p>
-<p><a href="#">Edit Info</a></p>
+<p><a href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a></p>
 <p><a href="{% url 'goalfish:weekly_progress_form' student.id %}">View Progress</a></p>
 {% endblock %}
