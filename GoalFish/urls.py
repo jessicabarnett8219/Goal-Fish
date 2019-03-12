@@ -20,4 +20,6 @@ urlpatterns = [
     path('weekly-progress-form/<int:student_id>/', views.weekly_progress_form, name='weekly_progress_form'),
     path('weekly-progress-results/<int:student_id>/', views.weekly_progress_results, name='weekly_progress_results'),
     path('delete-eval/<int:eval_id>/', views.delete_eval, name='delete_eval'),
+    path('edit-student-form/<int:student_id>/', views.edit_student_form, name='edit_student_form'),
+    path('edit-student/<int:student_id>/', views.edit_student, name='edit_student')
 ]

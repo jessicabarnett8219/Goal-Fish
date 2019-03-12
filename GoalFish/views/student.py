@@ -50,7 +50,8 @@ def add_student(request):
         classroomTeacher = classroom_teacher
     )
     new_student.save()
-    return HttpResponseRedirect(reverse('goalfish:all_students'))
+    return HttpResponseRedirect(reverse('goalfish:student_detail', args=(new_student.id,)))
+
 
 
 @login_required(login_url='/login')
@@ -68,5 +69,37 @@ def student_detail(request, student_id):
     template_name = 'goalfish/student_detail.html'
 
     return render(request, template_name, {"student": student})
+
+@login_required(login_url='/login')
+def edit_student_form(request, student_id):
+    current_user = request.user
+    student = get_object_or_404(Student, pk=student_id, user=current_user)
+    grade_levels = GradeLevel.objects.all()
+
+    template_name = "goalfish/edit_student_form.html"
+
+    return render(request, template_name, {"student": student, "grade_levels": grade_levels})
+
+@login_required(login_url='/login')
+def edit_student(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+
+
+    student.firstName = request.POST["first_name"]
+    student.lastName = request.POST["last_name"]
+    student.age = request.POST["age"]
+    student.classroomTeacher = request.POST["classroom_teacher"]
+
+    grade_level_id = request.POST["grade_level"]
+    grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
+    student.gradeLevel = grade_level
+
+    student.save()
+    return HttpResponseRedirect(reverse('goalfish:student_detail', args=(student_id,)))
+
+
+
+
+
 
 
