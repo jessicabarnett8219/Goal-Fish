@@ -1,5 +1,6 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
+<div class="container">
 <a href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
 <h1>{{current_student.firstName}} {{current_student.lastName}}'s Weekly Progress</h1>
 <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
@@ -8,41 +9,69 @@
     <input type="number" id="school_week" name="school_week" min="1" max="36" required>
     <input type="submit">
 </form>
-<ul>
-    {% for evaluation in evaluations %}
-    <li>
-        {{evaluation.date}}<br>
-        {{evaluation.goal1}}: {{evaluation.score1}}%<br>
-        {{evaluation.goal2}}: {{evaluation.score2}}%<br>
-        {{evaluation.goal3}}: {{evaluation.score3}}%<br>
-        {{evaluation.goal4}}: {{evaluation.score4}}%<br>
-        {{evaluation.goal5}}: {{evaluation.score5}}%<br>
-        {{evaluation.goal6}}: {{evaluation.score6}}%<br>
-    </li><br>
-    {% endfor %}
-    {% if evaluations|length == 1 %}
-        {% for evaluation in evaluations %}
-        <li>
-            Weekly Average Goal 1: {{evaluation.score1}}%<br>
-            Weekly Average Goal 2: {{evaluation.score2}}%<br>
-            Weekly Average Goal 3: {{evaluation.score3}}%<br>
-            Weekly Average Goal 4: {{evaluation.score4}}%<br>
-            Weekly Average Goal 5: {{evaluation.score5}}%<br>
-            Weekly Average Goal 6: {{evaluation.score6}}%
-        </li>
-        {% endfor %}
-    {% elif evaluations|length == 0 %}
-    <p>You haven't entered scores for this school week yet.</p>
-    {% else %}
-    <li>
-        Weekly Average Goal 1: {{ score1_avg.score1__avg }}%<br>
-        Weekly Average Goal 2: {{ score2_avg.score2__avg }}%<br>
-        Weekly Average Goal 3: {{ score3_avg.score3__avg }}%<br>
-        Weekly Average Goal 4: {{ score4_avg.score4__avg }}%<br>
-        Weekly Average Goal 5: {{ score5_avg.score5__avg }}%<br>
-        Weekly Average Goal 6: {{ score6_avg.score6__avg }}%
-    </li>
-    {% endif %}
 
-</ul>
+{% if evaluations %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Goal</td>
+                {% for evaluation in evaluations %}
+            <th scope="col">{{evaluation.date}}</td>
+                {% endfor %}
+            <th scope="col">Week Average</td>
+        </tr>
+    </thead>
+    <tr>
+        <th scope="row">Follows Rules and Routines</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score1}}%</td>
+        {% if evaluations|length == 1 %}
+        <td>{{ evaluation.score1 }}%</td>
+        {% endif %}
+        {% endfor %}
+        {% if evaluations|length > 1 %}
+        <td>{{ score1_avg.score1__avg }}%</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th scope="row">Keeps Materials Organized</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score2}}%</td>
+        {% endfor %}
+        <td>{{ score2_avg.score2__avg }}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Stays on Task and Participates</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score3}}%</td>
+        {% endfor %}
+        <td>{{ score3_avg.score3__avg }}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Stays in Area</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score4}}%</td>
+        {% endfor %}
+        <td>{{ score4_avg.score4__avg }}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Interacts Appropriately with Others</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score5}}%</td>
+        {% endfor %}
+        <td>{{ score5_avg.score5__avg }}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Asks for Help Appropriately</td>
+            {% for evaluation in evaluations %}
+        <td>{{evaluation.score5}}%</td>
+        {% endfor %}
+        <td>{{ score5_avg.score5__avg }}%</td>
+    </tr>
+</table>
+
+{% else %}
+<p>You haven't entered scores for this school week yet.</p>
+{% endif %}
+</div>
 {% endblock %}
