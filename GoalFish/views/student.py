@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from ..models import Student, User, GradeLevel
 from django.urls import reverse
+from django.db.models import Q
+
 
 
 @login_required(login_url='/login')
@@ -97,6 +99,17 @@ def edit_student(request, student_id):
 
     student.save()
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(student_id,)))
+
+@login_required(login_url='/login')
+def student_search(request):
+    current_user = request.user
+    name_query = request.POST["name_query"]
+    students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=name_query) | Q(lastName__icontains=name_query))
+    template_name = 'goalfish/all_students.html'
+    return render(request, template_name, {'students': students})
+
+
+
 
 
 
