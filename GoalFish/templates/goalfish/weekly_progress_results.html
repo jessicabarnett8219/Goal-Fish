@@ -16,7 +16,7 @@
         <tr>
             <th scope="col">Goal</td>
                 {% for evaluation in evaluations %}
-            <th scope="col">{{evaluation.date}}</td>
+            <th scope="col">{{evaluation.date|date:"D n/j"}}</td>
                 {% endfor %}
             <th scope="col">Week Average</td>
         </tr>
