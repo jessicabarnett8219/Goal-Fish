@@ -69,6 +69,7 @@ def student_detail(request, student_id):
     current_user = request.user
     student = get_object_or_404(Student, pk=student_id, user=current_user)
     template_name = 'goalfish/student_detail.html'
+    print("FULL NAME", student.fullName)
 
     return render(request, template_name, {"student": student})
 
@@ -104,7 +105,11 @@ def edit_student(request, student_id):
 def student_search(request):
     current_user = request.user
     name_query = request.POST["name_query"]
-    students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=name_query) | Q(lastName__icontains=name_query))
+    if ' ' in name_query:
+        split_name = name_query.split(" ")
+        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=split_name[0]) | Q(lastName__icontains=split_name[1]))
+    else:
+        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=name_query) | Q(lastName__icontains=name_query))
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': students})
 
