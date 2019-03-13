@@ -15,13 +15,23 @@
 </select>
 <input type="submit" value="Submit">
 </form>
+<form action="{% url 'goalfish:student_search' %}" method="POST">
+    {% csrf_token %}
+<label>Search Student by Name</label>
+<input type="text" name="name_query">
+<input type="Submit" value="Submit">
+</form>
 <ul>
-    {% for student in students %}
-    <li>
-        <p>{{ student.firstName }} {{ student.lastName }} Grade: {{ student.gradeLevel.grade}}</p>
-        <a href="{% url 'goalfish:student_detail' student.id %}">View Details</a>
-    </li>
-    {% endfor %}
+    {% if students %}
+        {% for student in students %}
+        <li>
+            <p>{{ student.firstName }} {{ student.lastName }} Grade: {{ student.gradeLevel.grade}}</p>
+            <a href="{% url 'goalfish:student_detail' student.id %}">View Details</a>
+        </li>
+        {% endfor %}
+    {% else %}
+        <p>Sorry, no students match that search.</p>
+    {% endif %}
 </ul>
 
 {% endblock content %}

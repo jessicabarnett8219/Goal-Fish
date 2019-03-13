@@ -30,6 +30,10 @@ class Student(models.Model):
     def __str__(self):
         return self.firstName, self.lastName, self.classroomTeacher
 
+    @property
+    def fullName(self):
+        return self.firstName + self.lastName
+
 class Evaluation(models.Model):
     student = models.ForeignKey(
         Student,
