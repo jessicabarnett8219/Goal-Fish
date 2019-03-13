@@ -24,8 +24,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goalfish:logout' %}">Logout</a>
             </li>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'goalfish:student_search' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="name_query">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
             </div>
