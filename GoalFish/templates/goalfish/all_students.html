@@ -2,37 +2,63 @@
 {% block content %}
 
 <h1>View Students</h1>
-<form action="{% url 'goalfish:grade_filter' %}" method="POST">
-    {% csrf_token %}
-<label for="grade_filter">Filter by Grade</label>
-<select name="grade" id="grade_filter">
-    <option value="1">K</option>
-    <option value="2">1</option>
-    <option value="3">2</option>
-    <option value="4">3</option>
-    <option value="5">4</option>
-    <option value="6">5</option>
-</select>
-<input type="submit" value="Submit">
-</form>
-<form action="{% url 'goalfish:student_search' %}" method="POST">
-    {% csrf_token %}
-<label>Search Student by Name</label>
-<input type="text" name="name_query">
-<input type="Submit" value="Submit">
-</form>
-<ul>
-    {% if students %}
-        {% for student in students %}
-        <li>
-            <p>{{ student.firstName }} {{ student.lastName }} Grade: {{ student.gradeLevel.grade}}</p>
-            <a href="{% url 'goalfish:student_detail' student.id %}">View Details</a>
-            <a href="{% url 'goalfish:new_eval' student.id %}">Add Evaluation</a>
-        </li>
-        {% endfor %}
-    {% else %}
-        <p>Sorry, no students match that search.</p>
-    {% endif %}
-</ul>
+<div class="d-flex mt-3">
+    <form action="{% url 'goalfish:grade_filter' %}" method="POST" class="mr-3">
+        <div class="form-row">
+            {% csrf_token %}
+            <div class="col-auto">
+                <label for="grade_filter" class="col-form-label">Filter by Grade</label>
+            </div>
+            <div class="col-auto">
+                <select name="grade" id="grade_filter" class="form-control">
+                    <option value="1">K </option>
+                    <option value="2">1 </option>
+                    <option value="3">2 </option>
+                    <option value="4">3 </option>
+                    <option value="5">4 </option>
+                    <option value="6">5 </option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <input type="submit" value="Apply" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+    <form action="{% url 'goalfish:student_search' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-auto">
+                <label class="col-form-label">Search Student by Name</label>
+            </div>
+            <div class="col-auto">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="name_query">
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="Submit" value="Search">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+{% if students %}
+<div class="d-flex flex-wrap student_list justify-content-around mt-4">
+{% for student in students %}
+<div class="card text-center mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ student.firstName }} {{ student.lastName }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Grade: {{student.gradeLevel.grade}}</h6>
+        <a href="{% url 'goalfish:student_detail' student.id %}" class="btn btn-primary">Details</a>
+        <a href="{% url 'goalfish:new_eval' student.id %}" class="btn btn-secondary">Add Evaluation</a>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<p>Sorry, no students match that search.</p>
+{% endif %}
 
 {% endblock content %}

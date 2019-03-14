@@ -1,15 +1,10 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>Student Detail</h1>
-</a>
-<ul>
-    <li>Name: {{student.firstName}} {{student.lastName}}</li>
-    <li>Age: {{student.age}}</li>
-    <li>Grade Level: {{student.gradeLevel.grade}}</li>
-    <li>Classroom Teacher: {{student.classroomTeacher}}</li>
-</ul>
+<h1>{{student.firstName}} {{student.lastName}}</h1>
 
-<p><a href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a></p>
-<p><a href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a></p>
-<p><a href="{% url 'goalfish:weekly_progress_form' student.id %}">View Progress</a></p>
+<p>Age: {{student.age}} Grade Level: {{student.gradeLevel.grade}} Classroom Teacher: {{student.classroomTeacher}}</p>
+
+<a class="btn btn-primary" href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a>
+<!-- <a class="btn btn-secondary" href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a> -->
+<a class="btn btn-secondary" href="{% url 'goalfish:weekly_progress_form' student.id %}">View Progress</a>
 {% endblock %}
