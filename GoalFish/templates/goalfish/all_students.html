@@ -27,6 +27,7 @@
         <li>
             <p>{{ student.firstName }} {{ student.lastName }} Grade: {{ student.gradeLevel.grade}}</p>
             <a href="{% url 'goalfish:student_detail' student.id %}">View Details</a>
+            <a href="{% url 'goalfish:new_eval' student.id %}">Add Evaluation</a>
         </li>
         {% endfor %}
     {% else %}
