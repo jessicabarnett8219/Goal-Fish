@@ -5,7 +5,11 @@
 <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
     {% csrf_token %}
     <label for="school_week">Select a School Week</label>
-    <input type="number" id="school_week" name="school_week" min="1" max="36" default="0" required>
+    <select name="school_week" required>
+        {% for week in available_weeks %}
+        <option value={{week.schoolWeek}}>{{week.schoolWeek}}</option>
+        {% endfor %}
+    </select>
     <input type="submit">
 </form>
 {% endblock %}

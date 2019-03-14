@@ -1,77 +1,76 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
 <div class="container">
-<a href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
-<h1>{{current_student.firstName}} {{current_student.lastName}}'s Weekly Progress</h1>
-<form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
-    {% csrf_token %}
-    <label for="school_week">Select a School Week</label>
-    <input type="number" id="school_week" name="school_week" min="1" max="36" required>
-    <input type="submit">
-</form>
+    <a href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
+    <h1>{{current_student.firstName}} {{current_student.lastName}}'s Weekly Progress</h1>
+    <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
+        {% csrf_token %}
+        <label for="school_week">Select a School Week</label>
+        <select name="school_week" id="school_week" required>
+            {% for week in available_weeks %}
+            <option value={{week.schoolWeek}}>{{week.schoolWeek}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
 
-{% if evaluations %}
-<table class="table table-striped">
-    <thead>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Goal</td>
+                    {% for evaluation in evaluations %}
+                <th scope="col">{{evaluation.date|date:"D n/j"}}</td>
+                    {% endfor %}
+                <th scope="col">Week Average</td>
+            </tr>
+        </thead>
         <tr>
-            <th scope="col">Goal</td>
+            <th scope="row">Follows Rules and Routines</td>
                 {% for evaluation in evaluations %}
-            <th scope="col">{{evaluation.date|date:"D n/j"}}</td>
-                {% endfor %}
-            <th scope="col">Week Average</td>
+            <td>{{evaluation.score1}}%</td>
+            {% if evaluations|length == 1 %}
+            <td>{{ evaluation.score1 }}%</td>
+            {% endif %}
+            {% endfor %}
+            {% if evaluations|length > 1 %}
+            <td>{{ score1_avg.score1__avg }}%</td>
+            {% endif %}
         </tr>
-    </thead>
-    <tr>
-        <th scope="row">Follows Rules and Routines</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score1}}%</td>
-        {% if evaluations|length == 1 %}
-        <td>{{ evaluation.score1 }}%</td>
-        {% endif %}
-        {% endfor %}
-        {% if evaluations|length > 1 %}
-        <td>{{ score1_avg.score1__avg }}%</td>
-        {% endif %}
-    </tr>
-    <tr>
-        <th scope="row">Keeps Materials Organized</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score2}}%</td>
-        {% endfor %}
-        <td>{{ score2_avg.score2__avg }}%</td>
-    </tr>
-    <tr>
-        <th scope="row">Stays on Task and Participates</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score3}}%</td>
-        {% endfor %}
-        <td>{{ score3_avg.score3__avg }}%</td>
-    </tr>
-    <tr>
-        <th scope="row">Stays in Area</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score4}}%</td>
-        {% endfor %}
-        <td>{{ score4_avg.score4__avg }}%</td>
-    </tr>
-    <tr>
-        <th scope="row">Interacts Appropriately with Others</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score5}}%</td>
-        {% endfor %}
-        <td>{{ score5_avg.score5__avg }}%</td>
-    </tr>
-    <tr>
-        <th scope="row">Asks for Help Appropriately</td>
-            {% for evaluation in evaluations %}
-        <td>{{evaluation.score5}}%</td>
-        {% endfor %}
-        <td>{{ score5_avg.score5__avg }}%</td>
-    </tr>
-</table>
-
-{% else %}
-<p>You haven't entered scores for this school week yet.</p>
-{% endif %}
+        <tr>
+            <th scope="row">Keeps Materials Organized</td>
+                {% for evaluation in evaluations %}
+            <td>{{evaluation.score2}}%</td>
+            {% endfor %}
+            <td>{{ score2_avg.score2__avg }}%</td>
+        </tr>
+        <tr>
+            <th scope="row">Stays on Task and Participates</td>
+                {% for evaluation in evaluations %}
+            <td>{{evaluation.score3}}%</td>
+            {% endfor %}
+            <td>{{ score3_avg.score3__avg }}%</td>
+        </tr>
+        <tr>
+            <th scope="row">Stays in Area</td>
+                {% for evaluation in evaluations %}
+            <td>{{evaluation.score4}}%</td>
+            {% endfor %}
+            <td>{{ score4_avg.score4__avg }}%</td>
+        </tr>
+        <tr>
+            <th scope="row">Interacts Appropriately with Others</td>
+                {% for evaluation in evaluations %}
+            <td>{{evaluation.score5}}%</td>
+            {% endfor %}
+            <td>{{ score5_avg.score5__avg }}%</td>
+        </tr>
+        <tr>
+            <th scope="row">Asks for Help Appropriately</td>
+                {% for evaluation in evaluations %}
+            <td>{{evaluation.score5}}%</td>
+            {% endfor %}
+            <td>{{ score5_avg.score5__avg }}%</td>
+        </tr>
+    </table>
 </div>
 {% endblock %}
