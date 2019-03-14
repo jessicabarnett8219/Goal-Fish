@@ -8,4 +8,9 @@
     <input type="number" id="school_week" name="school_week" min="1" max="36" default="0" required>
     <input type="submit">
 </form>
+<ul>
+{% for week in available_weeks %}
+<li>{{week.schoolWeek}}</li>
+{% endfor %}
+</ul>
 {% endblock %}

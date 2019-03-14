@@ -10,8 +10,10 @@ from django.db.models import Avg
 def weekly_progress_form(request, student_id):
     template_name = "goalfish/weekly_progress_form.html"
     current_student = get_object_or_404(Student, pk=student_id)
+    available_weeks = Evaluation.objects.values('schoolWeek').filter(student=current_student).order_by('schoolWeek').distinct()
+    context = {'current_student': current_student, 'available_weeks': available_weeks}
 
-    return render(request, template_name, {'current_student': current_student})
+    return render(request, template_name, context)
 
 
 @login_required(login_url='/login')
