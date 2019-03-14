@@ -22,6 +22,8 @@ def weekly_progress_results(request, student_id):
     current_student = get_object_or_404(Student, pk=student_id)
     school_week = request.POST["school_week"]
 
+    available_weeks = Evaluation.objects.values('schoolWeek').filter(student=current_student).order_by('schoolWeek').distinct()
+
     evaluations = Evaluation.objects.filter(student=current_student, schoolWeek=school_week)
 
     score1_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score1'))
@@ -32,4 +34,6 @@ def weekly_progress_results(request, student_id):
     score6_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score6'))
 
 
-    return render(request, template_name, {'current_student': current_student, 'evaluations': evaluations, "school_week": school_week, 'score1_avg': score1_avg, 'score2_avg': score2_avg, 'score3_avg': score3_avg, 'score4_avg': score4_avg, 'score5_avg': score5_avg, 'score6_avg': score6_avg })
+    context = {'current_student': current_student, 'evaluations': evaluations, "school_week": school_week, 'score1_avg': score1_avg, 'score2_avg': score2_avg, 'score3_avg': score3_avg, 'score4_avg': score4_avg, 'score5_avg': score5_avg, 'score6_avg': score6_avg, 'available_weeks': available_weeks }
+
+    return render(request, template_name, context)
