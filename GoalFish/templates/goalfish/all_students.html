@@ -41,6 +41,10 @@
             </div>
         </div>
     </form>
+    <form class="ml-3" action="{% url 'goalfish:all_students' %}" method="POST">
+            {% csrf_token %}
+        <input type="submit" value="View All" class="btn btn-secondary">
+    </form>
 
 </div>
 
