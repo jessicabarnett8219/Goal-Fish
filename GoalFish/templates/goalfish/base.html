@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'goalfish/index.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
 
 <body>
     {% if user.is_authenticated %}
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar">
         <a class="navbar-brand" href="/">GoalFish</a>
 
         <ul class="nav">
@@ -27,8 +28,12 @@
             </li>
             <form class="form-inline my-2 my-lg-0" action="{% url 'goalfish:student_search' %}" method="POST">
                 {% csrf_token %}
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="name_query">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for a Student" name="name_query">
+                    <div class="input-group-append">
+                        <input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">
+                    </div>
+                </div>
             </form>
             </div>
         </ul>
@@ -37,7 +42,7 @@
     <div><a href="{% url 'goalfish:register' %}">Register</a></div>
     <div><a href="{% url 'goalfish:login' %}">Login</a></div>
     {% endif %}
-    <div class="container mt-3">
+    <div class="container mt-5">
         {% block content %}
         {% endblock %}
     </div>

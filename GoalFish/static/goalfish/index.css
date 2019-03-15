@@ -1,3 +1,50 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+}
+
 .student_list {
     margin: 0 auto 0 auto;
+}
+
+.btn-primary {
+    background-color: #283593;
+    border-color: #283593;
+}
+
+.btn-primary:hover {
+    background-color: #666ad1;
+}
+
+.btn-secondary {
+    background-color: #2bbd7e;
+    border-color: #2bbd7e;
+    color:  white;
+}
+
+.btn-secondary:hover {
+    background-color: #69f0ae;
+    border-color: #69f0ae;
+}
+
+.navbar {
+    background-color: #001970;
+}
+
+.navbar-brand, .nav-link {
+    color: white;
+}
+
+.navbar:hover, .nav-link:hover {
+    color: #69f0ae;
+}
+
+.student_card {
+    width: 250px;
+}
+
+.fish_icon {
+    width: 120px;
+    height: auto;
+    margin: 10px auto 0 auto;
 }
