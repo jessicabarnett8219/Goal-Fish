@@ -27,6 +27,18 @@ h1 {
     border-color: #69f0ae;
 }
 
+.btn-outline-primary {
+    border: 2px solid #283593;
+    color: #283593;
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+    border: 2px solid #666ad1;
+    color: #666ad1;
+    background-color: transparent;
+}
+
 .navbar {
     background-color: #001970;
 }
@@ -48,3 +60,4 @@ h1 {
     height: auto;
     margin: 10px auto 0 auto;
 }
+

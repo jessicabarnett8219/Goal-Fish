@@ -1,10 +1,26 @@
 {% extends 'goalfish/base.html' %}
+{% load staticfiles %}
 {% block content %}
-<h1>{{student.firstName}} {{student.lastName}}</h1>
+<h1>{{student.firstName}} {{student.lastName}}'s Details</h1>
+<div class="row">
+    <div class="col-2 mt-4">
+        <a class="btn btn-primary mr-2 w-100" href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a>
+        <a class="btn btn-secondary mt-2 mr-2 w-100" href="{% url 'goalfish:weekly_progress_form' student.id %}">View
+            Progress</a>
+        <a class="btn btn-outline-primary mt-2 w-100" href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a>
+    </div>
+    <div class="col-10 mt-4">
+        <div class="card text-center mb-3 student_card">
+            <img src="{% static 'goalfish/fish_icons/fish-3.svg' %}" class="card-img-top fish_icon" alt="...">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Age: {{student.age}}</li>
+                    <li class="list-group-item">Grade Level: {{student.gradeLevel.grade}}</li>
+                    <li class="list-group-item">Classroom Teacher: {{student.classroomTeacher}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>Age: {{student.age}} Grade Level: {{student.gradeLevel.grade}} Classroom Teacher: {{student.classroomTeacher}}</p>
-
-<a class="btn btn-primary" href="{% url 'goalfish:new_eval' student.id %}">New Evaluation</a>
-<!-- <a class="btn btn-secondary" href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a> -->
-<a class="btn btn-secondary" href="{% url 'goalfish:weekly_progress_form' student.id %}">View Progress</a>
 {% endblock %}
