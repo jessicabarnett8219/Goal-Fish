@@ -1,32 +1,72 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>{{student.firstName}} {{student.lastName}}</h1>
-<form action="{% url 'goalfish:eval_added' student.id %}" method="POST">
+<h1 class="w-75">New Evaluation: {{student.firstName}} {{student.lastName}}</h1>
+<form action="{% url 'goalfish:eval_added' student.id %}" method="POST" class="d-inline">
     {% csrf_token %}
-    <label for="eval_date">Date</label>
-    <input type="date" id="eval_date" name="eval_date" required>
-    <label>School Week</label>
-    <input type="number" min="1" max="36" name="school_week" required>
-    {% for goal in goals %}
-    <div>
-    <label for="score">{{goal.description}}</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="0" required>
+        <div class="row mt-4">
+            <div class="col-auto">
+                <label for="eval_date" class="col-form-label">Date</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" id="eval_date" name="eval_date" class="form-control" required>
+            </div>
+            <div class="col-auto">
+                <label for="school_week" class="col-form-label">School Week</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" min="1" max="36" name="school_week" id="school_week" class="form-control" required>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="25" required>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="50" required>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="75" required>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="score{{goal.id}}" value="100" required>
-        </div>
-    </div>
-    {% endfor %}
-    <input type="submit" value="Save Evaluation">
+
+    <div class="row mt-3">
+        <div class="col-10 mt-2">
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    <label class="font-italic font-weight-bold mb-1">Percent of the Time</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label class="font-weight-bold">Goal Description</label>
+                </div>
+                <div class="col-8">
+                    <label class="pr-2">0</label>
+                    <label class="pl-1 pr-1">25</label>
+                    <label class="pl-2 pr-1">50</label>
+                    <label class="pl-2 pr-1">75</label>
+                    <label class="pl-1">100</label>
+                </div>
+            </div>
+            {% for goal in goals%}
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>{{goal.description}}</label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline mr-3">
+                        <input type="radio" name="score{{goal.id}}" value="0" required>
+                    </div>
+                    <div class="form-check form-check-inline mr-3">
+                        <input type="radio" name="score{{goal.id}}" value="25" required>
+                    </div>
+                    <div class="form-check form-check-inline mr-3">
+                        <input type="radio" name="score{{goal.id}}" value="50" required>
+                    </div>
+                    <div class="form-check form-check-inline mr-3">
+                        <input type="radio" name="score{{goal.id}}" value="75" required>
+                    </div>
+                    <div class="form-check form-check-inline mr-3">
+                        <input type="radio" name="score{{goal.id}}" value="100" required>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <input class="btn btn-primary" type="submit" value="Save Evaluation">
 </form>
+<a class="btn btn-outline-primary ml-2" href="{% url 'goalfish:student_detail' student.id %}">Cancel</a>
+</div>
+</div>
+</div>
 {% endblock %}

@@ -107,7 +107,7 @@ def student_search(request):
     name_query = request.POST["name_query"]
     if ' ' in name_query:
         split_name = name_query.split(" ")
-        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=split_name[0]) | Q(lastName__icontains=split_name[1]))
+        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=split_name[0]), Q(lastName__icontains=split_name[1]))
     else:
         students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=name_query) | Q(lastName__icontains=name_query))
     template_name = 'goalfish/all_students.html'
