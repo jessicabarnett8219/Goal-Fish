@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
-from ..models import Student, User, GradeLevel
+from ..models import Student, User, GradeLevel, Avatar
 from django.urls import reverse
 from django.db.models import Q
 
@@ -42,6 +42,7 @@ def add_student(request):
 
     grade_level_id = request.POST["grade_level"]
     grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
+    new_avatar = get_object_or_404(Avatar, pk=1)
 
     new_student = Student(
         user = current_user,
@@ -49,7 +50,8 @@ def add_student(request):
         firstName = first_name,
         lastName = last_name,
         age = age,
-        classroomTeacher = classroom_teacher
+        classroomTeacher = classroom_teacher,
+        avatar = new_avatar
     )
     new_student.save()
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(new_student.id,)))
