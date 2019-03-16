@@ -10,13 +10,13 @@
         <a class="btn btn-outline-primary mt-2 w-100" href="{% url 'goalfish:edit_student_form' student.id %}">Edit Info</a>
     </div>
     <div class="col-10 mt-4">
-        <div class="card text-center mb-3 student_card">
+        <div class="card mb-3 student_card">
             <img src="{% static 'goalfish/fish_icons/fish-3.svg' %}" class="card-img-top fish_icon" alt="...">
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Age: {{student.age}}</li>
-                    <li class="list-group-item">Grade Level: {{student.gradeLevel.grade}}</li>
-                    <li class="list-group-item">Classroom Teacher: {{student.classroomTeacher}}</li>
+                    <li class="list-group-item"><span class="font-weight-bold">Age </span> {{student.age}}</li>
+                    <li class="list-group-item"><span class="font-weight-bold">Grade Level </span>{{student.gradeLevel.grade}}</li>
+                    <li class="list-group-item"><span class="font-weight-bold">Classroom Teacher </span>{{student.classroomTeacher}}</li>
                 </ul>
             </div>
         </div>
