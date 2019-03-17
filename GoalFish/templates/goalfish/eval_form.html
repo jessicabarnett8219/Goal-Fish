@@ -3,20 +3,20 @@
 <h1 class="w-75">New Evaluation: {{student.firstName}} {{student.lastName}}</h1>
 <form action="{% url 'goalfish:eval_added' student.id %}" method="POST" class="d-inline">
     {% csrf_token %}
-        <div class="row mt-4">
-            <div class="col-auto">
-                <label for="eval_date" class="col-form-label">Date</label>
-            </div>
-            <div class="col-auto">
-                <input type="date" id="eval_date" name="eval_date" class="form-control" required>
-            </div>
-            <div class="col-auto">
-                <label for="school_week" class="col-form-label">School Week</label>
-            </div>
-            <div class="col-auto">
-                <input type="number" min="1" max="36" name="school_week" id="school_week" class="form-control" required>
-            </div>
+    <div class="row mt-4">
+        <div class="col-auto">
+            <label for="eval_date" class="col-form-label">Date</label>
         </div>
+        <div class="col-auto">
+            <input type="date" id="eval_date" name="eval_date" class="form-control" required>
+        </div>
+        <div class="col-auto">
+            <label for="school_week" class="col-form-label">School Week</label>
+        </div>
+        <div class="col-auto">
+            <input type="number" min="1" max="36" name="school_week" id="school_week" class="form-control" required>
+        </div>
+    </div>
 
     <div class="row mt-3">
         <div class="col-10 mt-2">
