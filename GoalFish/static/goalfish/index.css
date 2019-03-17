@@ -47,8 +47,17 @@ h1 {
     color: white;
 }
 
-.navbar:hover, .nav-link:hover {
+.eval_link, .eval_link:active, .eval_link:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar:hover, .nav-link:hover, .eval_link:hover {
     color: #69f0ae;
+}
+
+.eval_link:hover {
+    text-decoration: none;
 }
 
 .student_card {
@@ -59,5 +68,10 @@ h1 {
     width: 120px;
     height: auto;
     margin: 10px auto 0 auto;
+}
+
+.table_head {
+    background-color:#001970;
+    color: white;
 }
 

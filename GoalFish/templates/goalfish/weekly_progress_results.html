@@ -21,13 +21,13 @@
 </form>
 
 <table class="table table-striped">
-    <thead>
+    <thead class="table_head">
         <tr>
-            <th scope="col">Goal</td>
+            <td scope="col">Goal: Week {{school_week}}</td>
                 {% for evaluation in evaluations %}
-            <th scope="col">{{evaluation.date|date:"D n/j"}}</td>
+            <td scope="col"><a class="eval_link" href="{% url 'goalfish:eval_detail' evaluation.id %}">{{evaluation.date|date:"D n/j/y"}}</a></td>
                 {% endfor %}
-            <th scope="col">Week Average</td>
+            <td scope="col">Average</td>
         </tr>
     </thead>
     <tr>

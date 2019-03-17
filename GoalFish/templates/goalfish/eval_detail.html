@@ -5,13 +5,13 @@
 <div class="{{ message.tags }} alert alert-success" role="alert">{{ message }}</div>
 <hr>
 {% endfor %}
-<h1>{{evaluation.date}}, Week {{evaluation.schoolWeek}} </h1>
+<h1>{{evaluation.student.firstName}} {{evaluation.student.lastName}}: {{evaluation.date|date:"n/j/y"}}</h1>
 
 <table class="table table-striped w-50 mt-4">
-    <thead>
+    <thead class="table_head">
         <tr>
-            <th scope="col">{{evaluation.student.firstName}} {{evaluation.student.lastName}}</th>
-            <th scope="col">Percent of the Time</th>
+            <td scope="col">Goal</th>
+            <td scope="col">Percent of the Time</th>
         </tr>
     </thead>
     <tbody>
