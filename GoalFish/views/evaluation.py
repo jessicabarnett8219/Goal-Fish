@@ -5,6 +5,7 @@ from django.template import RequestContext
 from ..models import Student, User, GradeLevel, Goal, Evaluation
 from django.urls import reverse
 from django.db.models import Avg
+from django.contrib import messages
 
 
 @login_required(login_url='/login')
@@ -56,6 +57,7 @@ def add_evaluation(request, student_id):
         student=student
     )
     new_evaluation.save()
+    messages.success(request, 'The evaluation was saved.')
 
     return HttpResponseRedirect(reverse('goalfish:eval_detail', args=(new_evaluation.id, )))
 

@@ -2,6 +2,10 @@
 {% block content %}
 
 <h1>Evaluation Detail</h1>
+{% for message in messages %}
+<div class="{{ message.tags }} alert alert-success" role="alert">{{ message }}</div>
+<hr>
+{% endfor %}
 <h2>{{evaluation.student.firstName}} {{evaluation.student.lastName}}</h2>
 <h3>{{evaluation.date}} School Week: {{evaluation.schoolWeek}}</h3>
 <ul>
