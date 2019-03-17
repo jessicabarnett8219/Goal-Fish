@@ -2,28 +2,44 @@
 {% block content %}
 <h1>Edit a Student</h1>
 
-<form action="{% url 'goalfish:edit_student' student.id %}" method="POST">
+<form action="{% url 'goalfish:edit_student' student.id %}" method="POST" class="w-50 mt-3">
     {% csrf_token %}
-    <label for="first_name">First Name</label>
-    <input type="text" name="first_name" id="first_name" value="{{student.firstName}}">
-    <label for="last_name">Last Name</label>
-    <input type="text" name="last_name" id="last_name" value="{{student.lastName}}">
-    <label for="age">Age</label>
-    <input type="number" name="age" id="age" value="{{student.age}}">
-    <label for="grade_level">Grade Level</label>
-    <select name="grade_level" id="grade_level">
-
-    {% for level in grade_levels %}
-        {% if level.id == student.gradeLevel.id %}
-        <option value={{level.id}} selected>{{ level.grade }}</option>
-        {% else %}
-        <option value={{level.id}}>{{ level.grade }}</option>
-        {% endif %}
-    {% endfor %}
-   </select>
-    <label for="classroom_teacher">Classroom Teacher</label>
-    <input type="text" name="classroom_teacher" id="classroom_teacher" value="{{student.classroomTeacher}}">
-    <input type="submit" value="Save Changes">
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" id="first_name" class="form-control" value="{{student.firstName}}"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name" class="form-control" value="{{student.lastName}}" required>
+    </div>
+    <div class="form-group">
+        <label for="classroom_teacher">Classroom Teacher</label>
+        <input type="text" name="classroom_teacher" id="classroom_teacher" value="{{student.classroomTeacher}}" class="form-control">
+    </div>
+    <div class="form-row">
+        <div class="col-auto">
+            <label for="age" class="col-form-label">Age</label>
+        </div>
+        <div class="mr-3">
+            <input type="number" name="age" id="age" class="form-control" value="{{student.age}}" required>
+        </div>
+        <div class="col-auto">
+            <label for="grade_level" class="col-form-label">Grade Level</label>
+        </div>
+        <div class="col-auto">
+            <select name="grade_level" id="grade_level" class="form-control">
+                {% for level in grade_levels %}
+                {% if level.id == student.gradeLevel.id %}
+                <option value={{level.id}} selected>{{ level.grade }}</option>
+                {% else %}
+                <option value={{level.id}}>{{ level.grade }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <input type="submit" value="Save Changes" class="btn btn-primary mt-4">
 </form>
 
 {% endblock content %}

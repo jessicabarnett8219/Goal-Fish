@@ -9,7 +9,6 @@ from django.contrib import messages
 from random import *
 
 
-
 @login_required(login_url='/login')
 def list_students(request):
     '''[Queries the database for all objects in the student table and uses them in rendering the all_students template]
@@ -22,16 +21,20 @@ def list_students(request):
     '''
     current_user = request.user
 
-    all_students = Student.objects.filter(user=current_user).order_by('lastName', 'firstName')
+    all_students = Student.objects.filter(
+        user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': all_students})
+
 
 def grade_filter(request):
     current_user = request.user
     grade = request.POST["grade"]
-    students = Student.objects.filter(gradeLevel=grade, user=current_user).order_by('lastName', 'firstName')
+    students = Student.objects.filter(
+        gradeLevel=grade, user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': students})
+
 
 @login_required(login_url='/login')
 def add_student(request):
@@ -48,18 +51,17 @@ def add_student(request):
     new_avatar = get_object_or_404(Avatar, pk=random_number)
 
     new_student = Student(
-        user = current_user,
-        gradeLevel = grade_level,
-        firstName = first_name,
-        lastName = last_name,
-        age = age,
-        classroomTeacher = classroom_teacher,
-        avatar = new_avatar
+        user=current_user,
+        gradeLevel=grade_level,
+        firstName=first_name,
+        lastName=last_name,
+        age=age,
+        classroomTeacher=classroom_teacher,
+        avatar=new_avatar
     )
     new_student.save()
     messages.success(request, 'The student was successfully added.')
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(new_student.id,)))
-
 
 
 @login_required(login_url='/login')
@@ -70,6 +72,7 @@ def display_student_form(request):
 
     return render(request, template_name, {'grade_levels': grade_levels})
 
+
 @login_required(login_url='/login')
 def student_detail(request, student_id):
     current_user = request.user
@@ -78,6 +81,7 @@ def student_detail(request, student_id):
     evaluations = Evaluation.objects.filter(student=student)
 
     return render(request, template_name, {"student": student, "evaluations": evaluations})
+
 
 @login_required(login_url='/login')
 def edit_student_form(request, student_id):
@@ -90,10 +94,10 @@ def edit_student_form(request, student_id):
 
     return render(request, template_name, context)
 
+
 @login_required(login_url='/login')
 def edit_student(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
-
 
     student.firstName = request.POST["first_name"]
     student.lastName = request.POST["last_name"]
@@ -105,7 +109,10 @@ def edit_student(request, student_id):
     student.gradeLevel = grade_level
 
     student.save()
+    messages.success(request, 'Your changes were saved.')
+
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(student_id,)))
+
 
 @login_required(login_url='/login')
 def student_search(request):
@@ -113,18 +120,10 @@ def student_search(request):
     name_query = request.POST["name_query"]
     if ' ' in name_query:
         split_name = name_query.split(" ")
-        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=split_name[0]), Q(lastName__icontains=split_name[1]))
+        students = Student.objects.filter(Q(user=current_user), Q(
+            firstName__icontains=split_name[0]), Q(lastName__icontains=split_name[1]))
     else:
-        students = Student.objects.filter(Q(user=current_user), Q(firstName__icontains=name_query) | Q(lastName__icontains=name_query))
+        students = Student.objects.filter(Q(user=current_user), Q(
+            firstName__icontains=name_query) | Q(lastName__icontains=name_query))
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': students})
-
-
-
-
-
-
-
-
-
-
