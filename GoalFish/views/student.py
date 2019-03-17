@@ -21,14 +21,14 @@ def list_students(request):
     '''
     current_user = request.user
 
-    all_students = Student.objects.filter(user=current_user)
+    all_students = Student.objects.filter(user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': all_students})
 
 def grade_filter(request):
     current_user = request.user
     grade = request.POST["grade"]
-    students = Student.objects.filter(gradeLevel=grade, user=current_user)
+    students = Student.objects.filter(gradeLevel=grade, user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': students})
 
