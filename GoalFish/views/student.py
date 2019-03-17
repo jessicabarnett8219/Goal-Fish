@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
-from ..models import Student, User, GradeLevel, Avatar
+from ..models import Student, User, GradeLevel, Avatar, Evaluation
 from django.urls import reverse
 from django.db.models import Q
+from django.contrib import messages
 from random import *
 
 
@@ -56,6 +57,7 @@ def add_student(request):
         avatar = new_avatar
     )
     new_student.save()
+    messages.success(request, 'The student was successfully added.')
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(new_student.id,)))
 
 
@@ -73,8 +75,9 @@ def student_detail(request, student_id):
     current_user = request.user
     student = get_object_or_404(Student, pk=student_id, user=current_user)
     template_name = 'goalfish/student_detail.html'
+    evaluations = Evaluation.objects.filter(student=student)
 
-    return render(request, template_name, {"student": student})
+    return render(request, template_name, {"student": student, "evaluations": evaluations})
 
 @login_required(login_url='/login')
 def edit_student_form(request, student_id):
