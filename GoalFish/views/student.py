@@ -5,6 +5,7 @@ from django.template import RequestContext
 from ..models import Student, User, GradeLevel, Avatar
 from django.urls import reverse
 from django.db.models import Q
+from random import *
 
 
 
@@ -42,7 +43,8 @@ def add_student(request):
 
     grade_level_id = request.POST["grade_level"]
     grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
-    new_avatar = get_object_or_404(Avatar, pk=1)
+    random_number = random_number = randint(1, 5)
+    new_avatar = get_object_or_404(Avatar, pk=random_number)
 
     new_student = Student(
         user = current_user,
@@ -71,7 +73,6 @@ def student_detail(request, student_id):
     current_user = request.user
     student = get_object_or_404(Student, pk=student_id, user=current_user)
     template_name = 'goalfish/student_detail.html'
-    print("FULL NAME", student.fullName)
 
     return render(request, template_name, {"student": student})
 
