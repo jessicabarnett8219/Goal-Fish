@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
-from ..models import Student, User, GradeLevel
+from ..models import Student, User, GradeLevel, Avatar
 from django.urls import reverse
 from django.db.models import Q
+from random import *
 
 
 
@@ -20,14 +21,14 @@ def list_students(request):
     '''
     current_user = request.user
 
-    all_students = Student.objects.filter(user=current_user)
+    all_students = Student.objects.filter(user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': all_students})
 
 def grade_filter(request):
     current_user = request.user
     grade = request.POST["grade"]
-    students = Student.objects.filter(gradeLevel=grade, user=current_user)
+    students = Student.objects.filter(gradeLevel=grade, user=current_user).order_by('lastName', 'firstName')
     template_name = 'goalfish/all_students.html'
     return render(request, template_name, {'students': students})
 
@@ -42,6 +43,8 @@ def add_student(request):
 
     grade_level_id = request.POST["grade_level"]
     grade_level = get_object_or_404(GradeLevel, pk=grade_level_id)
+    random_number = random_number = randint(1, 5)
+    new_avatar = get_object_or_404(Avatar, pk=random_number)
 
     new_student = Student(
         user = current_user,
@@ -49,7 +52,8 @@ def add_student(request):
         firstName = first_name,
         lastName = last_name,
         age = age,
-        classroomTeacher = classroom_teacher
+        classroomTeacher = classroom_teacher,
+        avatar = new_avatar
     )
     new_student.save()
     return HttpResponseRedirect(reverse('goalfish:student_detail', args=(new_student.id,)))
@@ -69,7 +73,6 @@ def student_detail(request, student_id):
     current_user = request.user
     student = get_object_or_404(Student, pk=student_id, user=current_user)
     template_name = 'goalfish/student_detail.html'
-    print("FULL NAME", student.fullName)
 
     return render(request, template_name, {"student": student})
 

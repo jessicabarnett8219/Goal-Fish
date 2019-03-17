@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+class Avatar(models.Model):
+    fileName = models.CharField(max_length=250)
+    def __str__(self):
+        return self.description
 
 class Goal(models.Model):
     description = models.CharField(max_length=250)
@@ -26,6 +30,10 @@ class Student(models.Model):
     lastName = models.CharField(max_length=50)
     age = models.IntegerField()
     classroomTeacher = models.CharField(max_length=50)
+    avatar = models.ForeignKey(
+        Avatar,
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.firstName, self.lastName, self.classroomTeacher

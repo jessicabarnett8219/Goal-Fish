@@ -53,7 +53,7 @@
 <div class="d-flex flex-wrap student_list justify-content-around mt-4">
     {% for student in students %}
     <div class="card text-center mb-3 student_card">
-        <img src="{% static 'goalfish/fish_icons/fish-3.svg' %}" class="card-img-top fish_icon" alt="...">
+        <img src="../../static/goalfish/avatars/{{student.avatar.fileName}}" class="card-img-top fish_icon" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ student.firstName }} {{ student.lastName }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Grade: {{student.gradeLevel.grade}}</h6>
