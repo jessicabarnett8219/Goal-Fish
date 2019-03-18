@@ -43,6 +43,12 @@ h1 {
     background-color: #001970;
 }
 
+.navbar-brand {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.75rem;
+}
+
 .navbar-brand, .nav-link {
     color: white;
 }
@@ -54,6 +60,10 @@ h1 {
 
 .navbar:hover, .nav-link:hover, .eval_link:hover {
     color: #69f0ae;
+}
+
+.navbar-brand:hover {
+    color: #69f0ae      !important;
 }
 
 .eval_link:hover {
