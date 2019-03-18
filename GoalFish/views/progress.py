@@ -29,15 +29,15 @@ def weekly_progress_form(request, student_id):
 @login_required(login_url='/login')
 
 def weekly_progress_results(request, student_id):
-'''[Handles posting the data from the weekly progress form and rendering HTML with the scores for each goal for each day of that week that has an associated evaluation and the average score for that week.]
+    '''[Handles posting the data from the weekly progress form and rendering HTML with the scores for each goal for each day of that week that has an associated evaluation and the average score for that week.]
 
-Arguments:
-        request
-        student_id
+    Arguments:
+            request
+            student_id
 
-Returns:
-    [Rendered HTML] -- [weekly_progress.html template with that week's scores and average for each goal.]
-'''
+    Returns:
+        [Rendered HTML] -- [weekly_progress.html template with that week's scores and average for each goal.]
+    '''
     template_name = "goalfish/weekly_progress_results.html"
     current_student = get_object_or_404(Student, pk=student_id)
     # Gets the school week from the weekly_progress_form input
@@ -55,7 +55,6 @@ Returns:
     score4_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score4'))
     score5_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score5'))
     score6_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score6'))
-
 
     context = {'current_student': current_student, 'evaluations': evaluations, "school_week": school_week, 'score1_avg': score1_avg, 'score2_avg': score2_avg, 'score3_avg': score3_avg, 'score4_avg': score4_avg, 'score5_avg': score5_avg, 'score6_avg': score6_avg, 'available_weeks': available_weeks }
 
