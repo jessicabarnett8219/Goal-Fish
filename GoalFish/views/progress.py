@@ -8,6 +8,16 @@ from django.db.models import Avg
 
 @login_required(login_url='/login')
 def weekly_progress_form(request, student_id):
+    '''[Renders the form that allows users to select which week they want to view a students scores and averages for. Queries the database for all evaluations associated with the student and only renders weeks as options that that students has an evaluating associated with. ]
+
+    Arguments:
+        request
+        student_id
+
+    Returns:
+        [Rendered HTML] -- [The weekly_progress_form.html template with the weeks dropdown populated with weeks that the student has evaluations for. ]
+    '''
+
     template_name = "goalfish/weekly_progress_form.html"
     current_student = get_object_or_404(Student, pk=student_id)
     available_weeks = Evaluation.objects.values('schoolWeek').filter(student=current_student).order_by('schoolWeek').distinct()
@@ -17,15 +27,28 @@ def weekly_progress_form(request, student_id):
 
 
 @login_required(login_url='/login')
+
 def weekly_progress_results(request, student_id):
+'''[Handles posting the data from the weekly progress form and rendering HTML with the scores for each goal for each day of that week that has an associated evaluation and the average score for that week.]
+
+Arguments:
+        request
+        student_id
+
+Returns:
+    [Rendered HTML] -- [weekly_progress.html template with that week's scores and average for each goal.]
+'''
     template_name = "goalfish/weekly_progress_results.html"
     current_student = get_object_or_404(Student, pk=student_id)
+    # Gets the school week from the weekly_progress_form input
     school_week = request.POST["school_week"]
-
+    # Querying the database for the weeks needed to populate the weekly_progress form, which is rendered on the results page so that the user can select another week to view from that page.
     available_weeks = Evaluation.objects.values('schoolWeek').filter(student=current_student).order_by('schoolWeek').distinct()
 
+    # Queries the database for any evaluations associated with that student and that school week.
     evaluations = Evaluation.objects.filter(student=current_student, schoolWeek=school_week)
 
+    # Calculates the average score for all the scores associated with that goal and week and passes them as context so that they can be rendered in the progress results.
     score1_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score1'))
     score2_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score2'))
     score3_avg = Evaluation.objects.filter(schoolWeek=school_week, student=current_student).aggregate(Avg('score3'))
