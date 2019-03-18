@@ -17,7 +17,7 @@ def display_eval_form(request, student_id):
         student_id
 
     Returns:
-        [Rendered HTML] -- [A form that lists all the goals in the database and the affordance to choose a score for the student. The student being evaluated is retrieved using the id from the URL. The current user is retrieved and if that user is not associated with the student the user will be directed to a 404.]
+        [Rendered HTML] -- [Renders the eval_form.html template which lists all the goals in the database and the affordance to choose a score for the student. The student being evaluated is retrieved using the id from the URL. The current user is retrieved and if that user is not associated with the student the user will be directed to a 404.]
     '''
 
     current_user = request.user
@@ -91,7 +91,7 @@ def eval_detail(request, eval_id):
         eval_id
 
     Returns:
-        [Rendered HTML] -- [Details of that specific evaluation]
+        [Rendered HTML] -- [Renders the eval_detail.html template which lists the scores for that specific evaluation.]
     '''
 
     current_user = request.user
