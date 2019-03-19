@@ -30,11 +30,11 @@
         <div class="col-auto">
             <select name="grade_level" id="grade_level" class="form-control">
                 {% for level in grade_levels %}
-                {% if level.id == student.gradeLevel.id %}
+                    {% if level.id == student.gradeLevel.id %}
                 <option value={{level.id}} selected>{{ level.grade }}</option>
-                {% else %}
+                    {% else %}
                 <option value={{level.id}}>{{ level.grade }}</option>
-                {% endif %}
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
