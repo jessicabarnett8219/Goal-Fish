@@ -3,6 +3,10 @@ h1 {
     font-weight: 900;
 }
 
+h4 {
+    font-family: 'Nunito', sans-serif;
+}
+
 .student_list {
     margin: 0 auto 0 auto;
 }
@@ -70,6 +74,15 @@ h1 {
     text-decoration: none;
 }
 
+.auth_link {
+    color: #283593;
+}
+
+.auth_link:hover {
+    color: #69f0ae !important;
+    text-decoration: none !important;
+}
+
 .student_card {
     width: 250px;
 }
@@ -83,5 +96,10 @@ h1 {
 .table_head {
     background-color:#001970;
     color: white;
+}
+
+.splash_img {
+    max-width: 400px;
+    height: auto;
 }
 

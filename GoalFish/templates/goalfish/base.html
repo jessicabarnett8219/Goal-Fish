@@ -1,7 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>GoalFish</title>
@@ -42,7 +41,7 @@
     <div><a href="{% url 'goalfish:register' %}">Register</a></div>
     <div><a href="{% url 'goalfish:login' %}">Login</a></div>
     {% endif %}
-    <div class="container mt-5">
+    <div class="container">
         {% block content %}
         {% endblock %}
     </div>

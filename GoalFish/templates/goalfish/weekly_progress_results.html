@@ -1,6 +1,6 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>{{current_student.firstName}} {{current_student.lastName}}'s Progress</h1>
+<h1 class="mt-4">{{current_student.firstName}} {{current_student.lastName}}'s Progress</h1>
 <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
     {% csrf_token %}
     <div class="form-group form-row mt-4">
