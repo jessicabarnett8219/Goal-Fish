@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django import forms
-# from website.models import Product
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

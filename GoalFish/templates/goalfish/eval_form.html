@@ -1,6 +1,6 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1 class="w-75">New Evaluation: {{student.firstName}} {{student.lastName}}</h1>
+<h1 class="w-75 mt-4">New Evaluation: {{student.firstName}} {{student.lastName}}</h1>
 <form action="{% url 'goalfish:eval_added' student.id %}" method="POST" class="d-inline">
     {% csrf_token %}
     <div class="row mt-4">

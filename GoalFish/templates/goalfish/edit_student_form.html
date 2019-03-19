@@ -1,6 +1,6 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1>Edit a Student</h1>
+<h1 class="mt-4">Edit a Student</h1>
 
 <form action="{% url 'goalfish:edit_student' student.id %}" method="POST" class="w-50 mt-3">
     {% csrf_token %}

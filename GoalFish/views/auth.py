@@ -6,6 +6,7 @@ from django.template import RequestContext
 
 from goalfish.forms import UserForm
 
+@login_required(login_url='/login')
 def index(request):
     template_name = 'goalfish/index.html'
     return render(request, template_name, {})
@@ -73,7 +74,7 @@ def login_user(request):
         else:
             # Bad login details were provided. So we can't log the user in.
             print("Invalid login details: {}, {}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            return HttpResponse("Sorry, your username or password were incorrect.")
 
 
     return render(request, 'goalfish/login.html', {}, context)

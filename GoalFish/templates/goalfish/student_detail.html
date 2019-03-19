@@ -1,7 +1,7 @@
 {% extends 'goalfish/base.html' %}
 {% load staticfiles %}
 {% block content %}
-<h1>{{student.firstName}} {{student.lastName}}'s Details</h1>
+<h1 class="mt-4">{{student.firstName}} {{student.lastName}}'s Details</h1>
 {% for message in messages %}
 <div class="{{ message.tags }} alert alert-success" role="alert">{{ message }}</div>
 <hr>
