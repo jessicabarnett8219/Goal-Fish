@@ -73,24 +73,34 @@ def weekly_progress_results(request, student_id):
 
 @login_required(login_url='/login')
 def range_progress_results(request, student_id):
+    '''[Responsible for getting the values from the ranges selected on the range progress. Gets all the evaluations in that range of weeks, averages the scores for each goal in each week and then averages those averages. Then renders an html table with the values.]
+
+    Arguments:
+        request
+        student_id
+
+    Returns:
+        [Rendered html] -- [Table holding the average values for evaluations in that range]
+    '''
+
 
     current_student = get_object_or_404(Student, pk=student_id)
-
-    start_week = request.POST["start_week"]
-    end_week = request.POST["end_week"]
-
-    start_week = int(start_week)
-    end_week = int(end_week)
-
+    # Gets the weeks that the students has evaluations in and uses them to populate the drop downs with weeks in the range form
     available_weeks = Evaluation.objects.values('schoolWeek').filter(
         student=current_student).order_by('schoolWeek').distinct()
 
+    # Gets the start week from the range form and then converts it to an integer
+    start_week = request.POST["start_week"]
+    start_week = int(start_week)
+
+    # Gets the end week from the range form and then converts it to an integer
+    end_week = request.POST["end_week"]
+    end_week = int(end_week)
+
+    # Creates a list of all the integers between the start week and end week
     week_range = list(range(start_week, end_week+1))
 
-    evaluations = Evaluation.objects.filter(student=current_student)
-    evaluations = evaluations.filter(schoolWeek__gte=start_week)
-    evaluations = evaluations.filter(schoolWeek__lte=end_week)
-
+    # Creates empty lists to store the averages for week for each score
     score1_averages = []
     score2_averages = []
     score3_averages = []
@@ -98,6 +108,7 @@ def range_progress_results(request, student_id):
     score5_averages = []
     score6_averages = []
 
+    # Loops through all the possible weeks in the range. In each run of the loop queries the database for the evaluations that match the current student and the week that the loop is on, then calculates the average for each score and appends it to the appropriate list.
     for week in week_range:
         score1_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score1')))
         score2_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score2')))
@@ -106,8 +117,10 @@ def range_progress_results(request, student_id):
         score5_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score5')))
         score6_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score6')))
 
+    # Empty list to hold the average of the weeks in the range for each score. Index 0 is score 1, index 1 is score 2 and so on
     grand_averages = []
 
+    # Turns the list of dictionaries holding the averages for each score and then averages those averages and appends that average to the list
     score1_list = [li['score1__avg'] for li in score1_averages if li['score1__avg'] is not None]
     score1_sum = sum(score1_list)
     score1_length = len(score1_list)
@@ -145,7 +158,7 @@ def range_progress_results(request, student_id):
     grand_averages.append(score6_range_avg)
 
 
-    context = {'evaluations': evaluations, 'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages, 'score2_averages': score2_averages, 'score3_averages': score3_averages, 'score4_averages': score4_averages, 'score5_averages': score5_averages, 'score6_averages': score6_averages, 'grand_averages': grand_averages, 'start_week': start_week, 'end_week': end_week}
+    context = {'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages, 'score2_averages': score2_averages, 'score3_averages': score3_averages, 'score4_averages': score4_averages, 'score5_averages': score5_averages, 'score6_averages': score6_averages, 'grand_averages': grand_averages, 'start_week': start_week, 'end_week': end_week}
 
     return render(request, "goalfish/range_progress_results.html", context)
 
