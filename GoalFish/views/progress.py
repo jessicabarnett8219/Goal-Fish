@@ -108,49 +108,46 @@ def range_progress_results(request, student_id):
 
     grand_averages = []
 
-    score1_list = [li['score1__avg'] for li in score1_averages]
+# [n for n in range(2, num) if n % 2 != 0 and n > 2 and all(n % i != 0 for i in range(3, int(math.sqrt(n)) + 1, 2))]
+
+    score1_list = [li['score1__avg'] for li in score1_averages if li['score1__avg'] is not None]
     score1_sum = sum(score1_list)
     score1_length = len(score1_list)
     score1_range_avg = score1_sum / score1_length
     grand_averages.append(score1_range_avg)
 
-    score2_list = [li['score2__avg'] for li in score2_averages]
+    score2_list = [li['score2__avg'] for li in score2_averages if li['score2__avg'] is not None]
     score2_sum = sum(score2_list)
     score2_length = len(score2_list)
     score2_range_avg = score2_sum / score2_length
     grand_averages.append(score2_range_avg)
 
-    score3_list = [li['score3__avg'] for li in score3_averages]
+    score3_list = [li['score3__avg'] for li in score3_averages if li['score3__avg'] is not None]
     score3_sum = sum(score3_list)
     score3_length = len(score3_list)
     score3_range_avg = score3_sum / score3_length
     grand_averages.append(score3_range_avg)
 
-    score4_list = [li['score4__avg'] for li in score4_averages]
+    score4_list = [li['score4__avg'] for li in score4_averages if li['score4__avg'] is not None]
     score4_sum = sum(score4_list)
     score4_length = len(score4_list)
     score4_range_avg = score4_sum / score4_length
     grand_averages.append(score4_range_avg)
 
-    score5_list = [li['score5__avg'] for li in score5_averages]
+    score5_list = [li['score5__avg'] for li in score5_averages if li['score5__avg'] is not None]
     score5_sum = sum(score5_list)
     score5_length = len(score5_list)
     score5_range_avg = score5_sum / score5_length
     grand_averages.append(score5_range_avg)
 
-    score6_list = [li['score6__avg'] for li in score6_averages]
+    score6_list = [li['score6__avg'] for li in score6_averages if li['score6__avg'] is not None]
     score6_sum = sum(score6_list)
     score6_length = len(score6_list)
     score6_range_avg = score6_sum / score6_length
     grand_averages.append(score6_range_avg)
 
-    print("AVERAGES", grand_averages)
-
-
 
     context = {'evaluations': evaluations, 'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages, 'score2_averages': score2_averages, 'score3_averages': score3_averages, 'score4_averages': score4_averages, 'score5_averages': score5_averages, 'score6_averages': score6_averages, 'grand_averages': grand_averages}
-
-
 
     return render(request, "goalfish/range_progress_results.html", context)
 
