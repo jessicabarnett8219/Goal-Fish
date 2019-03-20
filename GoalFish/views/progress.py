@@ -108,8 +108,6 @@ def range_progress_results(request, student_id):
 
     grand_averages = []
 
-# [n for n in range(2, num) if n % 2 != 0 and n > 2 and all(n % i != 0 for i in range(3, int(math.sqrt(n)) + 1, 2))]
-
     score1_list = [li['score1__avg'] for li in score1_averages if li['score1__avg'] is not None]
     score1_sum = sum(score1_list)
     score1_length = len(score1_list)
