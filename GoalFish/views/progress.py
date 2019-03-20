@@ -79,10 +79,36 @@ def range_progress_results(request, student_id):
     start_week = request.POST["start_week"]
     end_week = request.POST["end_week"]
 
+    start_week = int(start_week)
+    end_week = int(end_week)+1
+
+    available_weeks = Evaluation.objects.values('schoolWeek').filter(
+        student=current_student).order_by('schoolWeek').distinct()
+
+    week_range = list(range(start_week, end_week))
+
     evaluations = Evaluation.objects.filter(student=current_student)
     evaluations = evaluations.filter(schoolWeek__gte=start_week)
     evaluations = evaluations.filter(schoolWeek__lte=end_week)
-    context = {'evaluations': evaluations, 'current_student': current_student}
+
+    score1_averages = []
+    score2_averages = []
+    score3_averages = []
+    score4_averages = []
+    score5_averages = []
+    score6_averages = []
+
+    for week in week_range:
+        score1_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score1')))
+        score2_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score2')))
+        score3_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score3')))
+        score4_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score4')))
+        score5_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score5')))
+        score6_averages.append(Evaluation.objects.filter(schoolWeek=week, student=current_student).aggregate(Avg('score6')))
+
+    context = {'evaluations': evaluations, 'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages }
+
+
 
     return render(request, "goalfish/range_progress_results.html", context)
 

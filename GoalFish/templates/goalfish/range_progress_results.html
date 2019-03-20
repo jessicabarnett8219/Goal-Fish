@@ -1,5 +1,27 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
 {% include 'goalfish/progress_form.html' %}
-<p>Range progress here</p>
+
+{% if evaluations %}
+<ul>
+    {% for week in week_range %}
+        {% for eval in evaluations %}
+            {% if week == eval.schoolWeek %}
+                <li>id:{{eval.id}} date:{{eval.date}} week:{{eval.schoolWeek}
+                </li>
+                {% endif %}
+        {% endfor %}
+    {% endfor %}
+</ul>
+<p>Score 1 Averages</p>
+<ul>
+    {% for average in score1_averages %}
+    <li> {{average.score1__avg}} </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<p>No evals match that range</p>
+{% endif %}
+
 {% endblock %}
