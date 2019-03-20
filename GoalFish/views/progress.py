@@ -80,12 +80,12 @@ def range_progress_results(request, student_id):
     end_week = request.POST["end_week"]
 
     start_week = int(start_week)
-    end_week = int(end_week)+1
+    end_week = int(end_week)
 
     available_weeks = Evaluation.objects.values('schoolWeek').filter(
         student=current_student).order_by('schoolWeek').distinct()
 
-    week_range = list(range(start_week, end_week))
+    week_range = list(range(start_week, end_week+1))
 
     evaluations = Evaluation.objects.filter(student=current_student)
     evaluations = evaluations.filter(schoolWeek__gte=start_week)
@@ -145,7 +145,7 @@ def range_progress_results(request, student_id):
     grand_averages.append(score6_range_avg)
 
 
-    context = {'evaluations': evaluations, 'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages, 'score2_averages': score2_averages, 'score3_averages': score3_averages, 'score4_averages': score4_averages, 'score5_averages': score5_averages, 'score6_averages': score6_averages, 'grand_averages': grand_averages}
+    context = {'evaluations': evaluations, 'current_student': current_student, 'available_weeks': available_weeks, 'week_range': week_range, 'score1_averages': score1_averages, 'score2_averages': score2_averages, 'score3_averages': score3_averages, 'score4_averages': score4_averages, 'score5_averages': score5_averages, 'score6_averages': score6_averages, 'grand_averages': grand_averages, 'start_week': start_week, 'end_week': end_week}
 
     return render(request, "goalfish/range_progress_results.html", context)
 
