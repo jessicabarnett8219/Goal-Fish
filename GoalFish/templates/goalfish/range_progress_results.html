@@ -7,16 +7,46 @@
     {% for week in week_range %}
         {% for eval in evaluations %}
             {% if week == eval.schoolWeek %}
-                <li>id:{{eval.id}} date:{{eval.date}} week:{{eval.schoolWeek}
+                <li>id:{{eval.id}} date:{{eval.date}} week:{{eval.schoolWeek}}
                 </li>
                 {% endif %}
         {% endfor %}
     {% endfor %}
 </ul>
-<p>Score 1 Averages</p>
 <ul>
+    <p>Score 1 Averages</p>
     {% for average in score1_averages %}
     <li> {{average.score1__avg}} </li>
+    {% endfor %}
+</ul>
+<ul>
+    <p>Score 2 Averages</p>
+    {% for average in score2_averages %}
+    <li> {{average.score2__avg}} </li>
+    {% endfor %}
+</ul>
+<ul>
+    <p>Score 3 Averages</p>
+    {% for average in score3_averages %}
+    <li> {{average.score3__avg}} </li>
+    {% endfor %}
+</ul>
+<ul>
+    <p>Score 4 Averages</p>
+    {% for average in score4_averages %}
+    <li> {{average.score4__avg}} </li>
+    {% endfor %}
+</ul>
+<ul>
+    <p>Score 5 Averages</p>
+    {% for average in score5_averages %}
+    <li> {{average.score5__avg}} </li>
+    {% endfor %}
+</ul>
+<ul>
+    <p>Score 6 Averages</p>
+    {% for average in score6_averages %}
+    <li> {{average.score6__avg}} </li>
     {% endfor %}
 </ul>
 
