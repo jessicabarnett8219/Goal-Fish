@@ -3,69 +3,61 @@
 {% include 'goalfish/progress_form.html' %}
 
 {% if evaluations %}
-<ul>
-    {% for evaluation in evaluations %}
-    <li>School Week: {{evaluation.schoolWeek}} Date: {{evaluation.date}}</li>
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 1 Averages</p>
-    {% for average in score1_averages %}
-        {% if average.score1__avg is not None %}
-        <li> {{average.score1__avg}} </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 2 Averages</p>
-    {% for average in score2_averages %}
-    {% if average.score2__avg is not None %}
-    <li> {{average.score2__avg}} </li>
-    {% endif %}
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 3 Averages</p>
-    {% for average in score3_averages %}
-    {% if average.score3__avg is not None %}
-    <li> {{average.score3__avg}} </li>
-    {% endif %}
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 4 Averages</p>
-    {% for average in score4_averages %}
-    {% if average.score4__avg is not None %}
-    <li> {{average.score4__avg}} </li>
-    {% endif %}
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 5 Averages</p>
-    {% for average in score5_averages %}
-    {% if average.score5__avg is not None %}
-    {% endif %}
-    <li> {{average.score5__avg}} </li>
-    {% endfor %}
-</ul>
-<ul>
-    <p>Goal 6 Averages</p>
-    {% for average in score6_averages %}
-    {% if average.score6__avg is not None %}
-    <li> {{average.score6__avg}} </li>
-    {% endif %}
-    {% endfor %}
-</ul>
-<ul>
-    <p>Grand Averages</p>
-    {% for average in grand_averages %}
-
-    <li>{{average|floatformat:"0"}}</li>
-    {% endfor %}
-</ul>
-
+<table class="table table-striped">
+    <thead class="table_head">
+        <tr>
+            <td scope="col">Goal: Weeks {{start_week}}-{{end_week}}</td>
+            {% for week in week_range %}
+            <td scope="col">Week {{week}} Avg</td>
+            {% endfor %}
+            <td scope="col">Overall Avg</td>
+        </tr>
+    </thead>
+    <tr>
+        <th scope="row">Follows Rules and Routines</th>
+        {% for score in score1_averages %}
+        <td>{{score.score1__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.0|floatformat:"0"}}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Keeps Materials Organized</th>
+        {% for score in score2_averages %}
+        <td>{{score.score2__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.1|floatformat:"0"}}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Stays on Task and Participates</td>
+            {% for score in score3_averages %}
+        <td>{{score.score3__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.2|floatformat:"0"}}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Stays in Area</td>
+            {% for score in score4_averages %}
+        <td>{{score.score4__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.3|floatformat:"0"}}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Interacts Appropriately with Others</td>
+            {% for score in score5_averages %}
+        <td>{{score.score5__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.4|floatformat:"0"}}%</td>
+    </tr>
+    <tr>
+        <th scope="row">Asks for Help Appropriately</td>
+            {% for score in score6_averages %}
+        <td>{{score.score6__avg|floatformat:"0"}}%</td>
+        {% endfor %}
+        <td class="font-weight-bold">{{grand_averages.5|floatformat:"0"}}%</td>
+    </tr>
+</table>
+<a class="btn btn-secondary" href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
 {% else %}
-<p>No evals match that range</p>
+<p>No evaluations match that range</p>
 {% endif %}
-
 {% endblock %}
