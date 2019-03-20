@@ -1,39 +1,57 @@
 {% block content %}
-<div class="container">
-    <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group form-row mt-4">
-            <div class="col-auto">
-                <label for="school_week" class="col-form-label">Select a School Week</label>
-            </div>
-            <div class="col-auto">
-                <select name="school_week" class="form-control" required>
-                    {% for week in available_weeks %}
-                    <option value={{week.schoolWeek}}>{{week.schoolWeek}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-auto">
-                <input type="submit" class="btn btn-primary">
-            </div>
+<div>
+    <div class="form-row">
+        <div class="col-auto">
+            <form action="{% url 'goalfish:weekly_progress_results' current_student.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group form-row mt-4">
+                    <div class="col-auto">
+                        <label for="school_week" class="col-form-label">Select a School Week</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="school_week" class="form-control" required>
+                            {% for week in available_weeks %}
+                            <option value={{week.schoolWeek}}>{{week.schoolWeek}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
-    <form action="{% url 'goalfish:range_progress_results' current_student.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group form-row mt-4">
-            <div class="col-auto">
-                <label for="start_week" class="col-form-label">Select a Range</label>
-            </div>
-            <div class="col-auto">
-                <input id="start_week" name="start_week" type="number" required min="1" max="36">
-            </div>
-            <div class="col-auto">
-                <input id="end_week" name="end_week" type="number" required min="1" max="36">
-            </div>
-            <div class="col-auto">
-                <input type="submit" class="btn btn-primary">
-            </div>
+        <div class="col-auto">
+            <form action="{% url 'goalfish:range_progress_results' current_student.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group form-row mt-4">
+                    <div class="col-auto">
+                        <label for="start_week" class="col-form-label ml-3">Or Select a Range</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="start_week" class="form-control" required>
+                            {% for week in available_weeks %}
+                            <option value={{week.schoolWeek}}>Week {{week.schoolWeek}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <label class="col-form-label">to</label>
+                    </div>
+                    <div class="col-auto">
+                        <select name="end_week" class="form-control" required>
+                            {% for week in available_weeks %}
+                            <option value={{week.schoolWeek}}>Week {{week.schoolWeek}}</option>
+                            {% endfor %}
+                        </select> </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+
+    </div>
+
 </div>
 {% endblock %}
