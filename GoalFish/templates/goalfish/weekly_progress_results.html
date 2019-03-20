@@ -1,6 +1,5 @@
 {% extends 'goalfish/base.html' %}
 {% block content %}
-<h1 class="mt-4">{{current_student.firstName}} {{current_student.lastName}}'s Progress</h1>
 {% include 'goalfish/progress_form.html' %}
 
 <table class="table table-striped">
@@ -18,11 +17,11 @@
             {% for evaluation in evaluations %}
         <td>{{evaluation.score1}}%</td>
         {% if evaluations|length == 1 %}
-        <td>{{ evaluation.score1 }}%</td>
+        <td class="font-weight-bold">{{ evaluation.score1 }}%</td>
         {% endif %}
         {% endfor %}
         {% if evaluations|length > 1 %}
-        <td>{{ score1_avg.score1__avg|floatformat:"0"}}%</td>
+        <td class="font-weight-bold">{{ score1_avg.score1__avg|floatformat:"0"}}%</td>
         {% endif %}
     </tr>
     <tr>
@@ -30,35 +29,35 @@
             {% for evaluation in evaluations %}
         <td>{{evaluation.score2}}%</td>
         {% endfor %}
-        <td>{{ score2_avg.score2__avg|floatformat:"0" }}%</td>
+        <td class="font-weight-bold">{{ score2_avg.score2__avg|floatformat:"0" }}%</td>
     </tr>
     <tr>
         <th scope="row">Stays on Task and Participates</td>
             {% for evaluation in evaluations %}
         <td>{{evaluation.score3}}%</td>
         {% endfor %}
-        <td>{{ score3_avg.score3__avg|floatformat:"0" }}%</td>
+        <td class="font-weight-bold">{{ score3_avg.score3__avg|floatformat:"0" }}%</td>
     </tr>
     <tr>
         <th scope="row">Stays in Area</td>
             {% for evaluation in evaluations %}
         <td>{{evaluation.score4}}%</td>
         {% endfor %}
-        <td>{{ score4_avg.score4__avg|floatformat:"0" }}%</td>
+        <td class="font-weight-bold">{{ score4_avg.score4__avg|floatformat:"0" }}%</td>
     </tr>
     <tr>
         <th scope="row">Interacts Appropriately with Others</td>
             {% for evaluation in evaluations %}
         <td>{{evaluation.score5}}%</td>
         {% endfor %}
-        <td>{{ score5_avg.score5__avg|floatformat:"0" }}%</td>
+        <td class="font-weight-bold">{{ score5_avg.score5__avg|floatformat:"0" }}%</td>
     </tr>
     <tr>
         <th scope="row">Asks for Help Appropriately</td>
             {% for evaluation in evaluations %}
         <td>{{evaluation.score5}}%</td>
         {% endfor %}
-        <td>{{ score5_avg.score5__avg|floatformat:"0" }}%</td>
+        <td class="font-weight-bold">{{ score5_avg.score5__avg|floatformat:"0" }}%</td>
     </tr>
 </table>
 <a class="btn btn-secondary" href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>

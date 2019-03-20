@@ -2,7 +2,6 @@
 {% block content %}
 {% include 'goalfish/progress_form.html' %}
 
-{% if evaluations %}
 <table class="table table-striped">
     <thead class="table_head">
         <tr>
@@ -57,7 +56,4 @@
     </tr>
 </table>
 <a class="btn btn-secondary" href="{% url 'goalfish:student_detail' current_student.id %}">Back to Student Details</a>
-{% else %}
-<p>No evaluations match that range</p>
-{% endif %}
 {% endblock %}

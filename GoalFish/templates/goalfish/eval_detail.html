@@ -2,7 +2,7 @@
 {% block content %}
 
 {% for message in messages %}
-<div class="{{ message.tags }} alert alert-success" role="alert">{{ message }}</div>
+<div class="{{ message.tags }} alert alert-success mt-4" role="alert">{{ message }}</div>
 <hr>
 {% endfor %}
 <h1 class="mt-4">{{evaluation.student.firstName}} {{evaluation.student.lastName}}: {{evaluation.date|date:"n/j/y"}}</h1>
