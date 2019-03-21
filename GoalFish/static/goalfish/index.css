@@ -7,6 +7,12 @@ h4 {
     font-family: 'Nunito', sans-serif;
 }
 
+body {
+    background-color: white;
+    max-width: 1500px;
+    margin: 0 auto 0 auto;
+}
+
 .student_list {
     margin: 0 auto 0 auto;
 }
