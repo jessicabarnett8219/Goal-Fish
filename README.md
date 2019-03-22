@@ -37,6 +37,10 @@ The entire app is only accessible to logged in users. A user can only view the s
 
 **A note about dates and school weeks:** Each time a user records a new evaluation they will need to choose the date of the evaluation a school week to associate it with. These dates and school weeks are independent of each other, and it is at the discretion of the user to select them. In talking to my teacher friend, I made the decision to leave this up to the user for now, because the teacher always knows what week out of the school calendar they are in. The plan is to include an automatic association with the school week in version 2. Right now the dates are used as a reference for the user and to distinguish from one evaluation to the next. The school week is used for tracking progress and displaying evaluations on the table by week. 
 
+## ERD
+
+![](GoalFish_ERD.png)
+
 ## To Clone
 1. Create a directory
 2. cd into that directory
