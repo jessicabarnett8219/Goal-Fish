@@ -31,3 +31,8 @@ The following functionalities are part of GoalFish:
 3. Add an evaluation for a student by clicking on their ‘add evaluation’ button from the ‘view all students’ screen, or that student’s detail screen
 4. View a student’s progress on goals from their detail screen by clicking on ‘view progress’
 5. On the progress screen, view their progress for one week at a time or for a range of weeks using the drop-down forms 
+
+## FYI
+The entire app is only accessible to logged in users. A user can only view the students and the associated data for the students that they created.
+
+**A note about dates and school weeks:** Each time a user records a new evaluation they will need to choose the date of the evaluation a school week to associate it with. These dates and school weeks are independent of each other, and it is at the discretion of the user to select them. In talking to my teacher friend, I made the decision to leave this up to the user for now, because the teacher always knows what week out of the school calendar they are in. The plan is to include an automatic association with the school week in version 2. Right now the dates are used as a reference for the user and to distinguish from one evaluation to the next. The school week is used for tracking progress and displaying evaluations on the table by week. 
