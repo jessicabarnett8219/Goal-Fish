@@ -36,3 +36,17 @@ The following functionalities are part of GoalFish:
 The entire app is only accessible to logged in users. A user can only view the students and the associated data for the students that they created.
 
 **A note about dates and school weeks:** Each time a user records a new evaluation they will need to choose the date of the evaluation a school week to associate it with. These dates and school weeks are independent of each other, and it is at the discretion of the user to select them. In talking to my teacher friend, I made the decision to leave this up to the user for now, because the teacher always knows what week out of the school calendar they are in. The plan is to include an automatic association with the school week in version 2. Right now the dates are used as a reference for the user and to distinguish from one evaluation to the next. The school week is used for tracking progress and displaying evaluations on the table by week. 
+
+## To Clone
+1. Create a directory
+2. cd into that directory
+3. Clone the repository
+4. Start a virtual environment
+5. run `pip install django`
+6. Create migrations python manage.py makemigrations goalfish
+7. Apply migrations to db `python manage.py migrate`
+8. Open your database browser tool (such as DB Browser) and execute scripts found in the `starter_data.sql` file. This will populate the app with goals, grade levels and avatars
+9. run `python manage.py runserver`
+10. Open up your browser and navigate to the running server
+11. Register and then start adding students and evaluations!
+
