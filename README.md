@@ -23,6 +23,8 @@ The following functionalities are part of GoalFish:
 3. View a table of student’s scores for each goal one week at a time and their average for that week 
 4. View a student’s scores for each goal in a range of weeks which includes the weekly average for each of the included weeks and an overall average for all weeks in that range
 
+![](GoalFish-Demo.gif)
+
 ### Typical flow:
 1. If it’s your first time in the app, add all your students. One of five random avatars will be associated with the student when they are created
 2. If your students are already in the app, find the student you need to add an evaluation for or view progress for by:
